@@ -48,7 +48,7 @@
                                         <Insets />
                                     </opaqueInsets>
                                 </VBox>
-                                <Label layoutX="335.0" layoutY="163.0" text="Mökkikodit">
+                                <Label layoutX="332.0" layoutY="152.0" text="Mökkikodit">
                                     <font>
                                         <Font name="Georgia" size="40.0" />
                                     </font>
@@ -174,10 +174,6 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="214.0" layoutY="68.0" prefHeight="26.0" prefWidth="107.0" />
-                        <TextField layoutX="214.0" layoutY="198.0" prefHeight="26.0" prefWidth="107.0" />
-                        <TextField layoutX="214.0" layoutY="123.0" prefHeight="26.0" prefWidth="107.0" />
-                        <TextField layoutX="214.0" layoutY="150.0" prefHeight="26.0" prefWidth="107.0" />
                         <Line endX="226.79998779296875" endY="3.814697265625E-6" layoutX="114.0" layoutY="59.0" startX="-100.0" />
                         <Line endX="217.79998779296875" layoutX="123.0" layoutY="185.0" startX="-108.903564453125" startY="0.207061767578125" />
                         <Line endX="-306.61065673828125" endY="94.29290771484375" layoutX="320.0" layoutY="208.0" startX="-306.70709228515625" startY="-148.29290771484375" />
@@ -188,13 +184,11 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="214.0" layoutY="95.0" prefHeight="26.0" prefWidth="107.0" />
                         <Label layoutX="20.0" layoutY="90.0" prefHeight="37.0" prefWidth="187.0" text="Erillisten varausten määrä :">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="214.0" layoutY="230.0" prefHeight="26.0" prefWidth="107.0" />
                         <Label layoutX="20.0" layoutY="224.0" prefHeight="39.0" prefWidth="187.0" text="Tuotto /per varaus :">
                            <font>
                               <Font size="13.0" />
@@ -205,7 +199,13 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="214.0" layoutY="261.0" prefHeight="26.0" prefWidth="107.0" />
+                        <ListView layoutX="207.0" layoutY="68.0" prefHeight="26.0" prefWidth="120.0" />
+                        <ListView layoutX="207.0" layoutY="95.0" prefHeight="26.0" prefWidth="120.0" />
+                        <ListView layoutX="207.0" layoutY="123.0" prefHeight="26.0" prefWidth="120.0" />
+                        <ListView layoutX="207.0" layoutY="150.0" prefHeight="26.0" prefWidth="120.0" />
+                        <ListView layoutX="207.0" layoutY="198.0" prefHeight="26.0" prefWidth="120.0" />
+                        <ListView layoutX="207.0" layoutY="230.0" prefHeight="26.0" prefWidth="120.0" />
+                        <ListView layoutX="207.0" layoutY="260.0" prefHeight="26.0" prefWidth="120.0" />
                      </children>
                   </AnchorPane>
               </content>
