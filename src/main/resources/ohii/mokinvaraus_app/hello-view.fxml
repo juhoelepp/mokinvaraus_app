@@ -16,112 +16,142 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Varauksen teko">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <VBox layoutX="44.0" layoutY="21.0" prefHeight="265.0" prefWidth="223.0" spacing="5.0">
-                           <children>
-                              <Label text="Asiakkaan Tiedot">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <TextField promptText="Etunimi" />
-                              <TextField promptText="Sukunimi" />
-                              <TextField promptText="Puhelin nro." />
-                              <TextField promptText="Sähköposti" />
-                              <TextField promptText="Osoite" />
-                              <TextField promptText="Yritys (jos on)" />
-                              <DatePicker promptText="Alku pvm." />
-                              <DatePicker promptText="Lopetus pvm." />
-                              <ComboBox prefWidth="150.0" promptText="Mökki" />
-                              <Button mnemonicParsing="false" text="LUO VARAUS" />
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </VBox>
-                        <Label layoutX="335.0" layoutY="163.0" text="Mökkikodit">
-                           <font>
-                              <Font name="Georgia" size="40.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Varaukset">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <SplitPane dividerPositions="0.5" prefHeight="371.0" prefWidth="600.0">
-                          <items>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="337.0">
-                                 <children>
-                                    <ListView prefHeight="370.0" prefWidth="297.0" />
-                                 </children>
-                              </AnchorPane>
-                              <VBox prefHeight="258.0" prefWidth="296.0" spacing="5.0">
-                                 <children>
-                                    <TextField promptText="Etunimi" />
-                                    <TextField promptText="Sukunimi" />
-                                    <TextField promptText="Puhelin nro." />
-                                    <TextField promptText="Sähköposti" />
-                                    <TextField promptText="Osoite" />
-                                    <TextField promptText="Yritys (jos on)" />
-                                    <DatePicker promptText="Alku pvm." />
-                                    <DatePicker promptText="Lopetus pvm." />
-                                    <ComboBox prefWidth="150.0" promptText="Mökki" />
-                                 </children>
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </VBox>
-                          </items>
-                        </SplitPane>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Mökit">
+    <children>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Varauksen teko">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="372.0" prefWidth="618.0">
+                            <children>
+                                <VBox layoutX="44.0" layoutY="21.0" prefHeight="265.0" prefWidth="223.0" spacing="5.0">
+                                    <children>
+                                        <Label text="Asiakkaan Tiedot">
+                                            <font>
+                                                <Font size="20.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField promptText="Etunimi" />
+                                        <TextField promptText="Sukunimi" />
+                                        <TextField promptText="Puhelin nro." />
+                                        <TextField promptText="Sähköposti" />
+                                        <TextField promptText="Osoite" />
+                                        <TextField promptText="Yritys (jos on)" />
+                                        <DatePicker promptText="Alku pvm." />
+                                        <DatePicker promptText="Lopetus pvm." />
+                                        <ComboBox prefWidth="150.0" promptText="Mökki" />
+                                        <Button mnemonicParsing="false" text="LUO VARAUS" />
+                                    </children>
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                </VBox>
+                                <Label layoutX="335.0" layoutY="163.0" text="Mökkikodit">
+                                    <font>
+                                        <Font name="Georgia" size="40.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Varausten hallinta">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.5" prefHeight="371.0" prefWidth="600.0">
+                                    <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="337.0">
+                                            <children>
+                                                <ListView prefHeight="370.0" prefWidth="297.0" />
+                                    <ListView layoutX="-1.0" prefHeight="366.0" prefWidth="301.0" />
+                                            </children>
+                                        </AnchorPane>
+                                        <VBox prefHeight="258.0" prefWidth="296.0" spacing="5.0">
+                                            <children>
+                                                <TextField promptText="Etunimi" />
+                                                <TextField promptText="Sukunimi" />
+                                                <TextField promptText="Puhelin nro." />
+                                                <TextField promptText="Sähköposti" />
+                                                <TextField promptText="Osoite" />
+                                                <TextField promptText="Yritys (jos on)" />
+                                                <DatePicker promptText="Alku pvm." />
+                                                <DatePicker promptText="Lopetus pvm." />
+                                                <ComboBox prefWidth="150.0" promptText="Mökki" />
+                                    <Button mnemonicParsing="false" text="PERU/POISTA" />
+                                    <Button mnemonicParsing="false" text="MUOKKAA" />
+                                    <Button mnemonicParsing="false" text="TALLENNA" />
+                                            </children>
+                                            <opaqueInsets>
+                                                <Insets />
+                                            </opaqueInsets>
+                                        </VBox>
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Mökkien hallinta">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane dividerPositions="0.6003344481605352" prefHeight="371.0" prefWidth="600.0">
+                                    <items>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                            <children>
+                                                <ListView prefHeight="370.0" prefWidth="357.0" />
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                            <children>
+                                                <VBox prefHeight="370.0" prefWidth="237.0" spacing="5.0">
+                                                    <children>
+                                                        <TextField promptText="Mökin nimi" />
+                                                        <TextField promptText="Hinta (vrk)" />
+                                                        <TextField promptText="Sijainti" />
+                                                        <TextField promptText="Henkilömäärä" />
+                                                        <TextField promptText="Koko (m^2)" />
+                                                        <TextArea prefHeight="52.0" prefWidth="237.0" promptText="Mukavuudet" />
+                                                        <TextArea prefHeight="61.0" prefWidth="237.0" promptText="Kuvaus" />
+                                          <Button mnemonicParsing="false" text="MUOKKAA" />
+                                          <Button mnemonicParsing="false" text="TALLENNA" />
+                                          <Button mnemonicParsing="false" text="POISTA" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            <Tab text="Laskujen hallinta ja seuranta">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <SplitPane dividerPositions="0.6003344481605352" prefHeight="371.0" prefWidth="600.0">
-                           <items>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                 <children>
-                                    <ListView prefHeight="370.0" prefWidth="357.0" />
-                                 </children>
-                              </AnchorPane>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                 <children>
-                                    <VBox prefHeight="370.0" prefWidth="237.0" spacing="5.0">
-                                       <children>
-                                          <TextField promptText="Mökin nimi" />
-                                          <TextField promptText="Hinta (vrk)" />
-                                          <TextField promptText="Sijainti" />
-                                          <TextField promptText="Henkilömäärä" />
-                                          <TextField promptText="Koko (m^2)" />
-                                          <TextArea prefHeight="52.0" prefWidth="237.0" promptText="Mukavuudet" />
-                                          <TextArea prefHeight="61.0" prefWidth="237.0" promptText="Kuvaus" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </AnchorPane>
-                           </items>
-                        </SplitPane>
+                        <ListView layoutY="1.0" prefHeight="371.0" prefWidth="386.0" />
+                        <TextField layoutX="390.0" layoutY="1.0" prefHeight="26.0" prefWidth="196.0" promptText="Etunimi" />
+                        <TextField layoutX="390.0" layoutY="35.0" prefHeight="26.0" prefWidth="196.0" promptText="Sukunimi" />
+                        <TextField layoutX="390.0" layoutY="69.0" prefHeight="26.0" prefWidth="196.0" promptText="Sähköposti" />
+                        <TextField layoutX="390.0" layoutY="103.0" prefHeight="26.0" prefWidth="196.0" promptText="Mökin nimi" />
+                        <TextField layoutX="390.0" layoutY="137.0" prefHeight="26.0" prefWidth="196.0" promptText="Vuorokausihinta" />
+                        <TextField layoutX="390.0" layoutY="208.0" prefHeight="26.0" prefWidth="196.0" promptText="Kokonaishinta" />
+                        <TextField layoutX="390.0" layoutY="173.0" prefHeight="26.0" prefWidth="196.0" promptText="Aika (vrk)" />
+                        <Button layoutX="390.0" layoutY="244.0" mnemonicParsing="false" text="MUOKKAA" />
+                        <Button layoutX="473.0" layoutY="244.0" mnemonicParsing="false" text="TALLENNA" />
+                        <Button layoutX="390.0" layoutY="279.0" mnemonicParsing="false" text="POISTA" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+            <Tab text="Majoittumisen raportointi">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </StackPane>
