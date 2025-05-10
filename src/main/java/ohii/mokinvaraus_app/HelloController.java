@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldListCell;
 
 public class HelloController {
     @FXML
@@ -124,6 +125,28 @@ public class HelloController {
     @FXML
     private ListView<String> varaustenlistaLW;
 
+    @FXML
+    private void listanmuokkaus(){
+        varaustenlistaLW.setEditable(true);
+        varaustenlistaLW.setCellFactory(TextFieldListCell.forListView());
+    }
+
+    @FXML
+    private void muokkauksentallennus(){
+        int valittuteksti = varaustenlistaLW.getSelectionModel().getSelectedIndex();
+        if (valittuteksti >= 0){
+            String muokattuVaraus = "Etunimi: " + etunimi2TF.getText() + '\n' +
+                    "Sukunimi: " + sukunimi2TF.getText() + '\n' +
+                    "Puhelinnumero: " + puhnro2TF.getText() + '\n' +
+                    "Sähköposti: " + sposti2TF.getText() + '\n' +
+                    "Osoite: " + osoite2TF.getText() + '\n' +
+                    "Yritys (jos on): " + yritys2TF.getText() + '\n' +
+                    "Alku pvm: " + alku2DP.getValue() + '\n' +
+                    "Lopetus pvm: " + lopetus2DP.getValue() + '\n' +
+                    "Mökki: " + mokki2CB.getValue();
+        }
+    }
+
     @Override
     public String toString(){
         return "Etunimi: " + etunimiTF.getText() + '\n' +
@@ -149,6 +172,9 @@ public class HelloController {
 
     @FXML
     private ComboBox mokkiCB;
+
+    @FXML
+    private ComboBox mokki2CB;
 
     @FXML
     private void varauksenluonti(){
