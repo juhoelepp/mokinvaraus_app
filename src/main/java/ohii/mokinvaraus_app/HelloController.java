@@ -8,18 +8,6 @@ import javafx.scene.control.*;
 
 public class HelloController {
     @FXML
-    private void handlePeruutaVaraus(ActionEvent e) {
-        System.out.println("PERUUTA/POISTA painettu.");
-        // Tähän logiikka varauksen perumiseen tai poistoon
-    }
-
-    @FXML
-    private void handleTallennaVaraus(ActionEvent e) {
-        System.out.println("TALLENNA VARAUS painettu.");
-        // Tähän logiikka varauksen tietojen päivittämiseen
-    }
-
-    @FXML
     private Tab Tab1, Tab2, Tab3, Tab4, Tab5;
 
     @FXML
@@ -74,10 +62,10 @@ public class HelloController {
     private TextField neliomaaraTF;
 
     @FXML
-    private TextField mukavuudetTF;
+    private TextArea mukavuudetTF;
 
     @FXML
-    private TextField kuvausTF;
+    private TextArea kuvausTF;
 
     @FXML
     private TextField etunimi3TF;
@@ -136,14 +124,36 @@ public class HelloController {
     @FXML
     private ListView<String> varaustenlistaLW;
 
+    @Override
+    public String toString(){
+        return "Etunimi: " + etunimiTF.getText() + '\n' +
+                "Sukunimi: " + sukunimiTF.getText() + '\n' +
+                "Puhelinnumero: " + puhnroTF.getText() + '\n' +
+                "Sähköposti: " + spostiTF.getText() + '\n' +
+                "Osoite: " + osoiteTF.getText() + '\n' +
+                "Yritys (jos on): " + yritysTF.getText() + '\n' +
+                "Alku pvm: " + alkuDP.getValue() + '\n' +
+                "Lopetus pvm: " + lopetusDP.getValue() + '\n' +
+                "Mökki: " + mokkiCB.getValue();
+    }
+
     @FXML
     private ListView<String> mokkilistaLW;
+
 
     @FXML
     private ListView<String> laskujenlistaLW;
 
     @FXML
     private ListView<String> raportointilistaLW;
+
+    @FXML
+    private ComboBox mokkiCB;
+
+    @FXML
+    private void varauksenluonti(){
+        varaustenlistaLW.getItems().add(toString());
+    }
 
 
 
