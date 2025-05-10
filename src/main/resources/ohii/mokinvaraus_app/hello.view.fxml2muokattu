@@ -22,7 +22,7 @@
     <children>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Varauksen teko">
+                <Tab fx:id="Tab1" text="Varauksen teko">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="372.0" prefWidth="618.0">
                             <children>
@@ -59,7 +59,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Varausten hallinta">
+                <Tab fx:id="Tab2" text="Varausten hallinta">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -95,7 +95,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Mökkien hallinta">
+                <Tab fx:id="Tab3" text="Mökkien hallinta">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -129,7 +129,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Laskujen hallinta ja seuranta">
+                <Tab fx:id="Tab4" text="Laskujen hallinta ja seuranta">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -148,7 +148,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Majoittumisen raportointi">
+                <Tab fx:id="Tab5" text="Majoittumisen raportointi">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
