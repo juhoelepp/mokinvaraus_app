@@ -180,11 +180,4 @@ public class HelloController {
     private void varauksenluonti(){
         varaustenlistaLW.getItems().add(toString());
     }
-
-
-
-
-
-
-
 }
