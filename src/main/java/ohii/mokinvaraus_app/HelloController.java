@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
 
+import javafx.scene.input.MouseEvent;
 import java.time.LocalDate;
 
 public class HelloController {
@@ -127,30 +128,6 @@ public class HelloController {
     @FXML
     private ListView<String> varaustenlistaLW;
 
-    @FXML
-    private void listanmuokkaus() {
-        varaustenlistaLW.setEditable(true);
-        varaustenlistaLW.setCellFactory(TextFieldListCell.forListView());
-    }
-
-    @FXML
-    private void Varaus() {
-        String etunimi2TF, sukunimi2TF, puhnro2TF, osoite2TF, yritys2TF, mokki2CB;
-        LocalDate alku2DP, lopetus2DP;
-    }
-
-    @Override
-    public String toString() {
-        return "Etunimi: " + etunimiTF.getText() + '\n' +
-                "Sukunimi: " + sukunimiTF.getText() + '\n' +
-                "Puhelinnumero: " + puhnroTF.getText() + '\n' +
-                "Sähköposti: " + spostiTF.getText() + '\n' +
-                "Osoite: " + osoiteTF.getText() + '\n' +
-                "Yritys (jos on): " + yritysTF.getText() + '\n' +
-                "Alku pvm: " + alkuDP.getValue() + '\n' +
-                "Lopetus pvm: " + lopetusDP.getValue() + '\n' +
-                "Mökki: " + mokkiCB.getValue();
-    }
 
     @FXML
     private ListView<String> mokkilistaLW;
@@ -169,20 +146,52 @@ public class HelloController {
     private ComboBox mokki2CB;
 
     @FXML
+    private void initialize() {
+        varaustenlistaLW.getSelectionModel().selectedItemProperty().addListener((obs, vanhaValinta, uusiValinta) -> {
+            if (uusiValinta != null) {
+                taytaKentat(uusiValinta);
+            }
+        });
+
+        varaustenlistaLW.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                String valittu = varaustenlistaLW.getSelectionModel().getSelectedItem();
+                if (valittu != null) {
+                    taytaKentat(valittu);
+                }
+            }
+        });
+
+        listanmuokkaus();
+    }
+
+    @FXML
+    private void listanmuokkaus() {
+        varaustenlistaLW.setEditable(true);
+        varaustenlistaLW.setCellFactory(TextFieldListCell.forListView());
+    }
+
+    @FXML
     private void varauksenluonti() {
         varaustenlistaLW.getItems().add(toString());
     }
 
     private void taytaKentat(String tieto) {
-        // Oletetaan että tiedot eroteltu | -merkillä
-        String[] osat = tieto.split("\\|");
-        if (osat.length >= 5) {
-            etunimi2TF.setText(osat[0].trim().split(" ")[0]);
-            sukunimi2TF.setText(osat[0].trim().split(" ")[1]);
-            puhnro2TF.setText(osat[1].trim());
-            sposti2TF.setText(osat[2].trim());
-            osoite2TF.setText(osat[3].trim());
-            yritys2TF.setText(osat[4].trim());
+        try {
+            String[] osat = tieto.split("\n");
+            if (osat.length >= 9) {
+                etunimi2TF.setText(osat[0].split(":")[1].trim());
+                sukunimi2TF.setText(osat[1].split(":")[1].trim());
+                puhnro2TF.setText(osat[2].split(":")[1].trim());
+                sposti2TF.setText(osat[3].split(":")[1].trim());
+                osoite2TF.setText(osat[4].split(":")[1].trim());
+                yritys2TF.setText(osat[5].split(":")[1].trim());
+                alku2DP.setValue(LocalDate.parse(osat[6].split(":")[1].trim()));
+                lopetus2DP.setValue(LocalDate.parse(osat[7].split(":")[1].trim()));
+                mokki2CB.setValue(osat[8].split(":")[1].trim());
+            }
+        } catch (Exception e) {
+            System.out.println("Tietojen täyttö epäonnistui: " + e.getMessage());
         }
     }
 
@@ -201,12 +210,18 @@ public class HelloController {
                     "Mökki: " + mokki2CB.getValue();
             varaustenlistaLW.getItems().set(indeksi, uusiTieto);
         }
+    }
 
-
-        varaustenlistaLW.getSelectionModel().selectedItemProperty().addListener((obs, vanhaValinta, uusiValinta) -> {
-            if (uusiValinta != null) {
-                taytaKentat(uusiValinta);
-            }
-        });
+    @Override
+    public String toString() {
+        return "Etunimi: " + etunimiTF.getText() + "\n" +
+                "Sukunimi: " + sukunimiTF.getText() + "\n" +
+                "Puhelinnumero: " + puhnroTF.getText() + "\n" +
+                "Sähköposti: " + spostiTF.getText() + "\n" +
+                "Osoite: " + osoiteTF.getText() + "\n" +
+                "Yritys (jos on): " + yritysTF.getText() + "\n" +
+                "Alku pvm: " + alkuDP.getValue() + "\n" +
+                "Lopetus pvm: " + lopetusDP.getValue() + "\n" +
+                "Mökki: " + mokkiCB.getValue();
     }
 }
