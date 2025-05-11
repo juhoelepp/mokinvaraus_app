@@ -80,7 +80,7 @@
                                                 <DatePicker fx:id="lopetus2DP" promptText="Lopetus pvm." />
                                                 <ComboBox fx:id="mokki2CB" prefWidth="150.0" promptText="Mökki" />
                                                 <Button fx:id="peruutavarausBut" mnemonicParsing="false" text="PERU/POISTA" />
-                                                <Button fx:id="tallennavarausBut" mnemonicParsing="false" onAction="#muokkauksentallennuskokeilu" text="TALLENNA" />
+                                                <Button fx:id="tallennavarausBut" mnemonicParsing="false" onAction="#muokkauksentallennus" text="TALLENNA" />
                                             </children>
                                             <opaqueInsets>
                                                 <Insets />
