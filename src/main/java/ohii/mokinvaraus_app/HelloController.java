@@ -126,6 +126,9 @@ public class HelloController {
     private Button poistalaskuBut;
 
     @FXML
+    private Button luolaskuBut;
+
+    @FXML
     private ListView<String> varaustenlistaLW;
 
 
