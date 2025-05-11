@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
 
+import java.time.LocalDate;
+
 public class HelloController {
     @FXML
     private Tab Tab1, Tab2, Tab3, Tab4, Tab5;
@@ -132,6 +134,24 @@ public class HelloController {
     }
 
     @FXML
+    private void Varaus(){
+        String etunimi2TF, sukunimi2TF, puhnro2TF, osoite2TF, yritys2TF, mokki2CB;
+        LocalDate alku2DP, lopetus2DP;
+    }
+
+    private void listanmuokkaaminen{
+        varaustenlistaLW.setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getClickCount() == 2){
+                Varaus() = varaustenlistaLW.getSelectionModel().getSelectedItems();
+                if (!= null){
+
+
+                }
+            }
+        });
+    }
+
+    @FXML
     private void muokkauksentallennus(){
         int valittuteksti = varaustenlistaLW.getSelectionModel().getSelectedIndex();
         if (valittuteksti >= 0){
@@ -180,4 +200,11 @@ public class HelloController {
     private void varauksenluonti(){
         varaustenlistaLW.getItems().add(toString());
     }
+
+
+
+
+
+
+
 }
