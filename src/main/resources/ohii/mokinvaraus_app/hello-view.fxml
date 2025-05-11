@@ -25,13 +25,8 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="372.0" prefWidth="618.0">
                             <children>
-                                <VBox layoutX="44.0" layoutY="21.0" prefHeight="265.0" prefWidth="223.0" spacing="5.0">
+                                <VBox layoutX="44.0" layoutY="21.0" prefHeight="341.0" prefWidth="229.0" spacing="5.0">
                                     <children>
-                                        <Label text="Asiakkaan Tiedot">
-                                            <font>
-                                                <Font size="20.0" />
-                                            </font>
-                                        </Label>
                                         <TextField fx:id="etunimiTF" promptText="Etunimi" />
                                         <TextField fx:id="sukunimiTF" promptText="Sukunimi" />
                                         <TextField fx:id="puhnroTF" promptText="Puhelin nro." />
@@ -42,6 +37,7 @@
                                         <DatePicker fx:id="lopetusDP" promptText="Lopetus pvm." />
                                         <ComboBox fx:id="mokkiCB" prefWidth="150.0" promptText="Mökki" />
                                         <Button fx:id="luovarausBut" mnemonicParsing="false" onAction="#varauksenluonti" text="LUO VARAUS" />
+                              <Button fx:id="luolaskuBut" mnemonicParsing="false" text="LUO LASKU" />
                                     </children>
                                     <opaqueInsets>
                                         <Insets />
@@ -138,8 +134,7 @@
                                 <TextField fx:id="vrkhinta2TF" layoutX="390.0" layoutY="137.0" prefHeight="26.0" prefWidth="196.0" promptText="Hinta (vrk)" />
                                 <TextField fx:id="kokhintaTF" layoutX="390.0" layoutY="208.0" prefHeight="26.0" prefWidth="196.0" promptText="Kokonaishinta" />
                                 <TextField fx:id="vrkaikaTF" layoutX="390.0" layoutY="173.0" prefHeight="26.0" prefWidth="196.0" promptText="Aika (vrk)" />
-                                <Button fx:id="muokkaalaskuBut" layoutX="390.0" layoutY="244.0" mnemonicParsing="false" text="MUOKKAA" />
-                                <Button fx:id="tallennalaskuBut" layoutX="473.0" layoutY="244.0" mnemonicParsing="false" text="TALLENNA" />
+                                <Button fx:id="tallennalaskuBut" layoutX="390.0" layoutY="242.0" mnemonicParsing="false" text="TALLENNA" />
                                 <Button fx:id="poistalaskuBut" layoutX="390.0" layoutY="279.0" mnemonicParsing="false" text="POISTA" />
                             </children>
                         </AnchorPane>
@@ -149,7 +144,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <Label layoutX="13.0" layoutY="14.0" prefHeight="38.0" prefWidth="184.0" text="Viimeiset 365 päivää:">
+                                <Label layoutX="13.0" layoutY="14.0" prefHeight="38.0" prefWidth="184.0" text="Mökkikodit - Tilastot">
                                     <font>
                                         <Font size="19.0" />
                                     </font>
