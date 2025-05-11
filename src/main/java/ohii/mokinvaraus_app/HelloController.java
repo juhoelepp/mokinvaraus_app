@@ -1,3 +1,4 @@
+package com.github.nissistomppa.ot1kurssityo;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -127,47 +128,19 @@ public class HelloController {
     private ListView<String> varaustenlistaLW;
 
     @FXML
-    private void listanmuokkaus(){
+    private void listanmuokkaus() {
         varaustenlistaLW.setEditable(true);
         varaustenlistaLW.setCellFactory(TextFieldListCell.forListView());
     }
 
     @FXML
-    private void Varaus(){
+    private void Varaus() {
         String etunimi2TF, sukunimi2TF, puhnro2TF, osoite2TF, yritys2TF, mokki2CB;
         LocalDate alku2DP, lopetus2DP;
     }
 
-    private void listanmuokkaaminen{
-        varaustenlistaLW.setOnMouseClicked(mouseEvent -> {
-            if (mouseEvent.getClickCount() == 2){
-                Varaus() = varaustenlistaLW.getSelectionModel().getSelectedItems();
-                if (!= null){
-
-
-                }
-            }
-        });
-    }
-
-    @FXML
-    private void muokkauksentallennus(){
-        int valittuteksti = varaustenlistaLW.getSelectionModel().getSelectedIndex();
-        if (valittuteksti >= 0){
-            String muokattuVaraus = "Etunimi: " + etunimi2TF.getText() + '\n' +
-                    "Sukunimi: " + sukunimi2TF.getText() + '\n' +
-                    "Puhelinnumero: " + puhnro2TF.getText() + '\n' +
-                    "Sähköposti: " + sposti2TF.getText() + '\n' +
-                    "Osoite: " + osoite2TF.getText() + '\n' +
-                    "Yritys (jos on): " + yritys2TF.getText() + '\n' +
-                    "Alku pvm: " + alku2DP.getValue() + '\n' +
-                    "Lopetus pvm: " + lopetus2DP.getValue() + '\n' +
-                    "Mökki: " + mokki2CB.getValue();
-        }
-    }
-
     @Override
-    public String toString(){
+    public String toString() {
         return "Etunimi: " + etunimiTF.getText() + '\n' +
                 "Sukunimi: " + sukunimiTF.getText() + '\n' +
                 "Puhelinnumero: " + puhnroTF.getText() + '\n' +
@@ -196,14 +169,44 @@ public class HelloController {
     private ComboBox mokki2CB;
 
     @FXML
-    private void varauksenluonti(){
+    private void varauksenluonti() {
         varaustenlistaLW.getItems().add(toString());
     }
 
+    private void taytaKentat(String tieto) {
+        // Oletetaan että tiedot eroteltu | -merkillä
+        String[] osat = tieto.split("\\|");
+        if (osat.length >= 5) {
+            etunimi2TF.setText(osat[0].trim().split(" ")[0]);
+            sukunimi2TF.setText(osat[0].trim().split(" ")[1]);
+            puhnro2TF.setText(osat[1].trim());
+            sposti2TF.setText(osat[2].trim());
+            osoite2TF.setText(osat[3].trim());
+            yritys2TF.setText(osat[4].trim());
+        }
+    }
+
+    @FXML
+    private void muokkauksentallennus() {
+        int indeksi = varaustenlistaLW.getSelectionModel().getSelectedIndex();
+        if (indeksi >= 0) {
+            String uusiTieto = "Etunimi: " + etunimi2TF.getText() + "\n" +
+                    "Sukunimi: " + sukunimi2TF.getText() + "\n" +
+                    "Puhelinnumero: " + puhnro2TF.getText() + "\n" +
+                    "Sähköposti: " + sposti2TF.getText() + "\n" +
+                    "Osoite: " + osoite2TF.getText() + "\n" +
+                    "Yritys (jos on): " + yritys2TF.getText() + "\n" +
+                    "Alku pvm: " + alku2DP.getValue() + "\n" +
+                    "Lopetus pvm: " + lopetus2DP.getValue() + "\n" +
+                    "Mökki: " + mokki2CB.getValue();
+            varaustenlistaLW.getItems().set(indeksi, uusiTieto);
+        }
 
 
-
-
-
-
+        varaustenlistaLW.getSelectionModel().selectedItemProperty().addListener((obs, vanhaValinta, uusiValinta) -> {
+            if (uusiValinta != null) {
+                taytaKentat(uusiValinta);
+            }
+        });
+    }
 }
