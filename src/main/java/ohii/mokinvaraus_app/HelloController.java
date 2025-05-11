@@ -178,27 +178,27 @@ public class HelloController {
 
     private void taytaKentat(String tieto) {
         try {
-            String[] osat = tieto.split("\n");
-            if (osat.length >= 9) {
-                etunimi2TF.setText(osat[0].split(":")[1].trim());
-                sukunimi2TF.setText(osat[1].split(":")[1].trim());
-                puhnro2TF.setText(osat[2].split(":")[1].trim());
-                sposti2TF.setText(osat[3].split(":")[1].trim());
-                osoite2TF.setText(osat[4].split(":")[1].trim());
-                yritys2TF.setText(osat[5].split(":")[1].trim());
-                alku2DP.setValue(LocalDate.parse(osat[6].split(":")[1].trim()));
-                lopetus2DP.setValue(LocalDate.parse(osat[7].split(":")[1].trim()));
-                mokki2CB.setValue(osat[8].split(":")[1].trim());
+            String[] tietorivi = tieto.split("\n");
+            if (tietorivi.length >= 9) {
+                etunimi2TF.setText(tietorivi[0].split(":")[1].trim());
+                sukunimi2TF.setText(tietorivi[1].split(":")[1].trim());
+                puhnro2TF.setText(tietorivi[2].split(":")[1].trim());
+                sposti2TF.setText(tietorivi[3].split(":")[1].trim());
+                osoite2TF.setText(tietorivi[4].split(":")[1].trim());
+                yritys2TF.setText(tietorivi[5].split(":")[1].trim());
+                alku2DP.setValue(LocalDate.parse(tietorivi[6].split(":")[1].trim()));
+                lopetus2DP.setValue(LocalDate.parse(tietorivi[7].split(":")[1].trim()));
+                mokki2CB.setValue(tietorivi[8].split(":")[1].trim());
             }
         } catch (Exception e) {
-            System.out.println("Tietojen täyttö epäonnistui: " + e.getMessage());
+            System.out.println("Tietojen täytössä havaittu ongelma! Tarkista syöte." + e.getMessage());
         }
     }
 
     @FXML
     private void muokkauksentallennus() {
-        int indeksi = varaustenlistaLW.getSelectionModel().getSelectedIndex();
-        if (indeksi >= 0) {
+        int varauslista = varaustenlistaLW.getSelectionModel().getSelectedIndex();
+        if (varauslista >= 0) {
             String uusiTieto = "Etunimi: " + etunimi2TF.getText() + "\n" +
                     "Sukunimi: " + sukunimi2TF.getText() + "\n" +
                     "Puhelinnumero: " + puhnro2TF.getText() + "\n" +
@@ -208,7 +208,17 @@ public class HelloController {
                     "Alku pvm: " + alku2DP.getValue() + "\n" +
                     "Lopetus pvm: " + lopetus2DP.getValue() + "\n" +
                     "Mökki: " + mokki2CB.getValue();
-            varaustenlistaLW.getItems().set(indeksi, uusiTieto);
+            varaustenlistaLW.getItems().set(varauslista, uusiTieto);
+        }
+    }
+
+    @FXML
+    private void poistavaraus() {
+        int varauslista = varaustenlistaLW.getSelectionModel().getSelectedIndex();
+        if (varauslista >= 0) {
+            varaustenlistaLW.getItems().remove(varauslista);
+        } else {
+            System.out.println("Poistettavaa varausta ei ole valittu. Tuplaklikkaa uudelleen.");
         }
     }
 
