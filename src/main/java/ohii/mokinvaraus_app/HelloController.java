@@ -1,4 +1,3 @@
-package com.github.nissistomppa.ot1kurssityo;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
