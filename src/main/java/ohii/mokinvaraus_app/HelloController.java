@@ -154,14 +154,9 @@ public class HelloController {
 
     @FXML
     private void varaustentuplaklikkaus() {
-        varaustenlistaLW.getSelectionModel().selectedItemProperty().addListener((obs, vanhaValinta, uusiValinta) -> {
-            if (uusiValinta != null) {
-                taytavarauskentat(uusiValinta);
-            }
-        });
-
         varaustenlistaLW.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
+                muokattavienlaskujemaara = laskujenlistaLW.getSelectionModel().getSelectedIndex();
                 String valittu = varaustenlistaLW.getSelectionModel().getSelectedItem();
                 if (valittu != null) {
                     taytavarauskentat(valittu);
@@ -174,8 +169,6 @@ public class HelloController {
 
     @FXML
     private void listanmuokkaus() {
-        varaustenlistaLW.setEditable(true);
-        varaustenlistaLW.setCellFactory(TextFieldListCell.forListView());
     }
 
     @FXML
@@ -198,13 +191,12 @@ public class HelloController {
                 mokki2CB.setValue(tietorivi[8].split(":")[1].trim());
             }
         } catch (Exception e) {
-            System.out.println("Tietojen täytössä havaittu ongelma! Tarkista syöte." + e.getMessage());
+            System.out.println("Tietojen täytössä havaittu ongelma! Tarkista syöte.");
         }
     }
 
     @FXML
     private void muokkauksentallennus() {
-        int varauslista = varaustenlistaLW.getSelectionModel().getSelectedIndex();
         if (varauslista >= 0) {
             String uusiTieto = "Etunimi: " + etunimi2TF.getText() + "\n" +
                     "Sukunimi: " + sukunimi2TF.getText() + "\n" +
@@ -216,8 +208,12 @@ public class HelloController {
                     "Lopetus pvm: " + lopetus2DP.getValue() + "\n" +
                     "Mökki: " + mokki2CB.getValue();
             varaustenlistaLW.getItems().set(varauslista, uusiTieto);
+            varauslista = -1;
         }
     }
+
+    @FXML
+    private int varauslista;
 
     @FXML
     private void poistavaraus() {
@@ -261,7 +257,7 @@ public class HelloController {
             }
 
             double kokonaishinta = vrkhinta * vrkaika;
-            
+
             String lasku = "Etunimi: " + etunimi + "\n" +
                     "Sukunimi: " + sukunimi + "\n" +
                     "Sähköposti: " + sposti + "\n" +
@@ -315,19 +311,11 @@ public class HelloController {
             vrkaikaTF.setText(rivit[5].split(":")[1].trim());
             kokhintaTF.setText(rivit[6].split(":")[1].replace("€", "").trim());
         } catch (Exception e) {
-            System.out.println("Laskun kenttien täytössä virhe: " + e.getMessage());
+            System.out.println("Laskun kenttien täytössä virhe: ");
         }
     }
     @FXML
     private void laskujentuplaklikkaus() {
-        varaustenlistaLW.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                String valittu = varaustenlistaLW.getSelectionModel().getSelectedItem();
-                if (valittu != null) {
-                    taytavarauskentat(valittu);
-                }
-            }
-        });
         laskujenlistaLW.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 muokattavienlaskujemaara = laskujenlistaLW.getSelectionModel().getSelectedIndex();
@@ -337,7 +325,9 @@ public class HelloController {
                 }
             }
         });
+
         listanmuokkaus();
     }
 
 }
+
