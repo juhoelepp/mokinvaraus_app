@@ -9,6 +9,7 @@ import javafx.scene.control.cell.TextFieldListCell;
 
 import javafx.scene.input.MouseEvent;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class HelloController {
     @FXML
@@ -129,6 +130,9 @@ public class HelloController {
     private Button luolaskuBut;
 
     @FXML
+    private Button maksettuBut;
+
+    @FXML
     private ListView<String> varaustenlistaLW;
 
 
@@ -149,10 +153,10 @@ public class HelloController {
     private ComboBox mokki2CB;
 
     @FXML
-    private void initialize() {
+    private void varaustentuplaklikkaus() {
         varaustenlistaLW.getSelectionModel().selectedItemProperty().addListener((obs, vanhaValinta, uusiValinta) -> {
             if (uusiValinta != null) {
-                taytaKentat(uusiValinta);
+                taytavarauskentat(uusiValinta);
             }
         });
 
@@ -160,7 +164,7 @@ public class HelloController {
             if (event.getClickCount() == 2) {
                 String valittu = varaustenlistaLW.getSelectionModel().getSelectedItem();
                 if (valittu != null) {
-                    taytaKentat(valittu);
+                    taytavarauskentat(valittu);
                 }
             }
         });
@@ -179,7 +183,7 @@ public class HelloController {
         varaustenlistaLW.getItems().add(toString());
     }
 
-    private void taytaKentat(String tieto) {
+    private void taytavarauskentat(String tieto) {
         try {
             String[] tietorivi = tieto.split("\n");
             if (tietorivi.length >= 9) {
@@ -237,4 +241,103 @@ public class HelloController {
                 "Lopetus pvm: " + lopetusDP.getValue() + "\n" +
                 "Mökki: " + mokkiCB.getValue();
     }
+    @FXML
+    private void luolasku() {
+        try {
+            String etunimi = etunimiTF.getText();
+            String sukunimi = sukunimiTF.getText();
+            String sposti = spostiTF.getText();
+            String mokki = mokkiCB.getValue() != null ? mokkiCB.getValue().toString() : "";
+            double vrkhinta = 0.0;
+            long vrkaika = 0;
+
+            if (vrkhintaTF.getText() != null && !vrkhintaTF.getText().isEmpty()) {
+                vrkhinta = Double.parseDouble(vrkhintaTF.getText());
+            }
+
+            if (alkuDP.getValue() != null && lopetusDP.getValue() != null) {
+                vrkaika = ChronoUnit.DAYS.between(alkuDP.getValue(), lopetusDP.getValue());
+                if (vrkaika == 0) vrkaika = 1;
+            }
+
+            double kokonaishinta = vrkhinta * vrkaika;
+            
+            String lasku = "Etunimi: " + etunimi + "\n" +
+                    "Sukunimi: " + sukunimi + "\n" +
+                    "Sähköposti: " + sposti + "\n" +
+                    "Mökin nimi: " + mokki + "\n" +
+                    "Hinta (vrk): " + vrkhinta + "€" + "\n" +
+                    "Aika (vrk): " + vrkaika + "\n" +
+                    "Kokonaishinta: " + kokonaishinta + "€";
+
+            laskujenlistaLW.getItems().add(lasku);
+
+        } catch (Exception e) {
+            System.out.println("Laskun luonnissa tapahtui virhe: " + e.getMessage());
+        }
+    }
+    @FXML
+    private void poistalasku() {
+        int varauslista = laskujenlistaLW.getSelectionModel().getSelectedIndex();
+        if (varauslista >= 0) {
+            laskujenlistaLW.getItems().remove(varauslista);
+        } else {
+            System.out.println("Poistettavaa laskua ei ole valittu. Tuplaklikkaa uudelleen.");
+        }
+    }
+    @FXML
+    private void tallennalasku() {
+        if (muokattavienlaskujemaara >= 0) {
+            String uusiLasku = "Etunimi: " + etunimi3TF.getText() + "\n" +
+                    "Sukunimi: " + sukunimi3TF.getText() + "\n" +
+                    "Sähköposti: " + sposti3TF.getText() + "\n" +
+                    "Mökin nimi: " + mokinnimi2TF.getText() + "\n" +
+                    "Hinta (vrk): " + vrkhinta2TF.getText() + "€\n" +
+                    "Aika (vrk): " + vrkaikaTF.getText() + "\n" +
+                    "Kokonaishinta: " + kokhintaTF.getText() + "€";
+
+            laskujenlistaLW.getItems().set(muokattavienlaskujemaara, uusiLasku);
+            muokattavienlaskujemaara = -1;
+        }
+    }
+    @FXML
+    private int muokattavienlaskujemaara;
+
+    @FXML
+    private void taytaLaskuKentat(String tieto) {
+        try {
+            String[] rivit = tieto.split("\n");
+            etunimi3TF.setText(rivit[0].split(":")[1].trim());
+            sukunimi3TF.setText(rivit[1].split(":")[1].trim());
+            sposti3TF.setText(rivit[2].split(":")[1].trim());
+            mokinnimi2TF.setText(rivit[3].split(":")[1].trim());
+            vrkhinta2TF.setText(rivit[4].split(":")[1].replace("€", "").trim());
+            vrkaikaTF.setText(rivit[5].split(":")[1].trim());
+            kokhintaTF.setText(rivit[6].split(":")[1].replace("€", "").trim());
+        } catch (Exception e) {
+            System.out.println("Laskun kenttien täytössä virhe: " + e.getMessage());
+        }
+    }
+    @FXML
+    private void laskujentuplaklikkaus() {
+        varaustenlistaLW.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                String valittu = varaustenlistaLW.getSelectionModel().getSelectedItem();
+                if (valittu != null) {
+                    taytavarauskentat(valittu);
+                }
+            }
+        });
+        laskujenlistaLW.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                muokattavienlaskujemaara = laskujenlistaLW.getSelectionModel().getSelectedIndex();
+                String valittu = laskujenlistaLW.getSelectionModel().getSelectedItem();
+                if (valittu != null) {
+                    taytaLaskuKentat(valittu);
+                }
+            }
+        });
+        listanmuokkaus();
+    }
+
 }
