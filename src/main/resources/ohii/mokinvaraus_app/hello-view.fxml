@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.nissistomppa.ot1kurssityo.HelloController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ohjelmistotuotanto1.ot1varaus.HelloController">
     <children>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -37,7 +37,7 @@
                                         <DatePicker fx:id="lopetusDP" promptText="Lopetus pvm." />
                                         <ComboBox fx:id="mokkiCB" prefWidth="150.0" promptText="Mökki" />
                                         <Button fx:id="luovarausBut" mnemonicParsing="false" onAction="#varauksenluonti" text="LUO VARAUS" />
-                              <Button fx:id="luolaskuBut" mnemonicParsing="false" onAction="#luolasku" text="LUO LASKU" />
+                                        <Button fx:id="luolaskuBut" mnemonicParsing="false" onAction="#luolasku" text="LUO LASKU" />
                                     </children>
                                     <opaqueInsets>
                                         <Insets />
@@ -61,7 +61,7 @@
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="337.0">
                                             <children>
                                                 <ListView prefHeight="370.0" prefWidth="297.0" />
-                                                <ListView fx:id="varaustenlistaLW" editable="true" layoutX="-1.0" prefHeight="366.0" prefWidth="301.0" />
+                                                <ListView fx:id="varaustenlistaLW" editable="true" layoutX="-1.0" onMouseClicked="#varaustentuplaklikkaus" prefHeight="366.0" prefWidth="301.0" />
                                             </children>
                                         </AnchorPane>
                                         <VBox prefHeight="258.0" prefWidth="296.0" spacing="5.0">
@@ -126,7 +126,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <ListView fx:id="laskujenlistaLW" layoutY="1.0" prefHeight="371.0" prefWidth="386.0" />
+                                <ListView fx:id="laskujenlistaLW" layoutY="1.0" onMouseClicked="#laskujentuplaklikkaus" prefHeight="371.0" prefWidth="386.0" />
                                 <TextField fx:id="etunimi3TF" layoutX="390.0" layoutY="1.0" prefHeight="26.0" prefWidth="196.0" promptText="Etunimi" />
                                 <TextField fx:id="sukunimi3TF" layoutX="390.0" layoutY="35.0" prefHeight="26.0" prefWidth="196.0" promptText="Sukunimi" />
                                 <TextField fx:id="sposti3TF" layoutX="390.0" layoutY="69.0" prefHeight="26.0" prefWidth="196.0" promptText="Sähköposti" />
@@ -136,7 +136,7 @@
                                 <TextField fx:id="vrkaikaTF" layoutX="390.0" layoutY="173.0" prefHeight="26.0" prefWidth="196.0" promptText="Aika (vrk)" />
                                 <Button fx:id="tallennalaskuBut" layoutX="390.0" layoutY="242.0" mnemonicParsing="false" onAction="#tallennalasku" text="TALLENNA" />
                                 <Button fx:id="poistalaskuBut" layoutX="477.0" layoutY="242.0" mnemonicParsing="false" onAction="#poistalasku" text="POISTA" />
-                        <Button fx:id="maksettuBut" layoutX="390.0" layoutY="278.0" mnemonicParsing="false" style="-fx-background-color: lightgreen;" text="MERKITSE MAKSETUKSI" />
+                                <Button fx:id="maksettuBut" layoutX="390.0" layoutY="278.0" mnemonicParsing="false" style="-fx-background-color: lightgreen;" text="MERKITSE MAKSETUKSI" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -152,7 +152,7 @@
                                 </Label>
                                 <Line endX="-313.492919921875" endY="99.29290771484375" layoutX="655.0" layoutY="203.0" startX="-313.492919921875" startY="-143.29290771484375" />
                                 <Line endX="217.79998779296875" layoutX="123.0" layoutY="303.0" startX="-108.903564453125" startY="0.207061767578125" />
-                        <ListView fx:id="raportointilistaLW" layoutX="14.0" layoutY="59.0" prefHeight="284.0" prefWidth="414.0" />
+                                <ListView fx:id="raportointilistaLW" layoutX="14.0" layoutY="59.0" prefHeight="284.0" prefWidth="414.0" />
                             </children>
                         </AnchorPane>
                     </content>
