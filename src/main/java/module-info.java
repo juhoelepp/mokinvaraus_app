@@ -3,6 +3,6 @@ module ohii.mokinvaraus_app {
     requires javafx.fxml;
 
 
-    opens ohii.mokinvaraus_app to javafx.fxml;
-    exports ohii.mokinvaraus_app;
+    opens ot1.mokinvaraus_app to javafx.fxml;
+    exports ot1.mokinvaraus_app;
 }

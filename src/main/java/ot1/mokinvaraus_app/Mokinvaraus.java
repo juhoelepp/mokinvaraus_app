@@ -1,4 +1,4 @@
-package ohii.mokinvaraus_app;
+package ot1.mokinvaraus_app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

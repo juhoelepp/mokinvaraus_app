@@ -1,4 +1,4 @@
-package com.github.nissistomppa.ot1kurssityo;
+package ot1.mokinvaraus_app;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

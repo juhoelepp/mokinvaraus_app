@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ohii.mokinvaraus_app/ohii.mokinvaraus_app.Mokinvaraus</mainClass>
+                            <mainClass>ohii.mokinvaraus_app/ot1.mokinvaraus_app.Mokinvaraus</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
