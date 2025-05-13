@@ -1,17 +1,15 @@
 package ot1.mokinvaraus_app;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldListCell;
 
-import javafx.scene.input.MouseEvent;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ResourceBundle;
 
-public class HelloController {
+public class HelloController implements Initializable {
     @FXML
     private Tab Tab1, Tab2, Tab3, Tab4, Tab5;
 
@@ -147,10 +145,16 @@ public class HelloController {
     private ListView<String> raportointilistaLW;
 
     @FXML
-    private ComboBox mokkiCB;
+    private ComboBox<String> mokkiCB;
 
     @FXML
-    private ComboBox mokki2CB;
+    private ComboBox<String> mokki2CB;
+
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        String[] vuokrattavatmokit = {"Mökki 1", "Mökki 2", "Mökki 3", "Mökki 4", "Mökki 5", "Mökki 6", "Mökki 7", "Mökki 8", "Mökki 9", "Mökki 10", "Mökki 11", "Mökki 12"};
+        mokkiCB.getItems().addAll(vuokrattavatmokit);
+        mokki2CB.getItems().addAll(vuokrattavatmokit);
+    }
 
     @FXML
     private void varaustentuplaklikkaus() {
@@ -191,7 +195,7 @@ public class HelloController {
                 mokki2CB.setValue(tietorivi[8].split(":")[1].trim());
             }
         } catch (Exception e) {
-            System.out.println("Tietojen täytössä havaittu ongelma! Tarkista syöte.");
+            System.out.println("Tiedoja ei täytetty oikein.");
         }
     }
 
@@ -221,7 +225,7 @@ public class HelloController {
         if (varauslista >= 0) {
             varaustenlistaLW.getItems().remove(varauslista);
         } else {
-            System.out.println("Poistettavaa varausta ei ole valittu. Tuplaklikkaa uudelleen.");
+            System.out.println("Varausta ei poistettu. Tuplaklikkaa poistettavaa varausta ja kokeile uudelleen.");
         }
     }
 
@@ -269,7 +273,7 @@ public class HelloController {
             laskujenlistaLW.getItems().add(lasku);
 
         } catch (Exception e) {
-            System.out.println("Laskun luonnissa tapahtui virhe: " + e.getMessage());
+            System.out.println("Laskua ei luotu. Kokeile uudelleen.");
         }
     }
     @FXML
@@ -278,7 +282,7 @@ public class HelloController {
         if (varauslista >= 0) {
             laskujenlistaLW.getItems().remove(varauslista);
         } else {
-            System.out.println("Poistettavaa laskua ei ole valittu. Tuplaklikkaa uudelleen.");
+            System.out.println("Laskua ei poistettu. Tuplaklikkaa poistettavaa laskua ja kokeile uudelleen.");
         }
     }
     @FXML
