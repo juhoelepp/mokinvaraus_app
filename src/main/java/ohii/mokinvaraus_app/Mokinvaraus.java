@@ -12,7 +12,7 @@ public class Mokinvaraus extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Mokinvaraus.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Mökinvaraus");
+        stage.setTitle("Mökkien varausohjelma");
         stage.setScene(scene);
         stage.show();
     }
