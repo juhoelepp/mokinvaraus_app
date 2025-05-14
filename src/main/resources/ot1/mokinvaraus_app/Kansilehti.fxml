@@ -10,45 +10,39 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="1031.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ot1.mokinvaraus_app.KirjautumisController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ot1.mokinvaraus_app.kirjautumiscontroller">
     <left>
         <AnchorPane prefHeight="618.0" prefWidth="700.0" BorderPane.alignment="CENTER">
             <children>
-                <Text layoutX="14.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mökkikodit">
+                <Text layoutX="21.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mökkikodit" wrappingWidth="591.578125">
                     <font>
-                        <Font name="System Bold" size="96.0" />
+                        <Font name="System Bold" size="55.0" />
                     </font>
                 </Text>
-                <ImageView fitHeight="449.0" fitWidth="718.0" layoutY="169.0" pickOnBounds="true" />
-            </children>
-        </AnchorPane>
-    </left>
-    <center>
-        <AnchorPane prefHeight="618.0" prefWidth="795.0" BorderPane.alignment="CENTER">
-            <children>
-                <Label layoutX="14.0" layoutY="261.0" text="Käyttäjänimi">
+                <ImageView fitHeight="400.0" fitWidth="600.0" layoutY="169.0" pickOnBounds="true" />
+                <Label layoutX="218.0" layoutY="176.0" text="Käyttäjänimi:">
                     <font>
                         <Font size="22.0" />
                     </font>
                 </Label>
-                <Label layoutX="14.0" layoutY="309.0" text="Salasana">
+                <Label layoutX="256.0" layoutY="222.0" text="Salasana:">
                     <font>
                         <Font size="22.0" />
                     </font>
                 </Label>
-                <TextField fx:id="kayttajatunnus" layoutX="150.0" layoutY="265.0" promptText="Käyttäjänimi" />
-                <PasswordField fx:id="salasana" layoutX="150.0" layoutY="313.0" promptText="Salasana" />
-                <Button fx:id="kirjautumisbt" layoutX="150.0" layoutY="366.0" mnemonicParsing="false" onAction="#vaihdaikkunaan2" text="Kirjaudu">
+                <TextField fx:id="kayttajatunnus" layoutX="359.0" layoutY="179.0" promptText="Käyttäjänimi" />
+                <PasswordField fx:id="salasana" layoutX="359.0" layoutY="225.0" promptText="Salasana" />
+                <Button fx:id="kirjautumisbt" layoutX="418.0" layoutY="265.0" mnemonicParsing="false" onAction="#vaihdaikkunaan2" text="Kirjaudu">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Button>
-            <Label fx:id="tietokirjautumisesta" layoutX="28.0" layoutY="461.0">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </Label>
+                <Label fx:id="tietokirjautumisesta" layoutX="126.0" layoutY="304.0" prefHeight="55.0" prefWidth="440.0">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
             </children>
         </AnchorPane>
-    </center>
+    </left>
 </BorderPane>
