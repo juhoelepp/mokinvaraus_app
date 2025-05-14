@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class sivujenvaihto {
+public class SivujenVaihto {
     private Stage stage;
     private Scene scene;
     private Parent root;
