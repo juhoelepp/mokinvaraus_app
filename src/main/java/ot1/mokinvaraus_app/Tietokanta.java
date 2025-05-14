@@ -35,6 +35,60 @@ public class Tietokanta {
         return mokit;
     }
 
+    public ArrayList<Asiakas> haeAsiakkaat() {
+        ArrayList<Asiakas> asiakkaat = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass)) {
+            Statement s = connection.createStatement();
+            ResultSet tulos = s.executeQuery("SELECT * FROM ASIAKKAAT");
+            while (tulos.next()) {
+                Asiakas haettu_asiakas = new Asiakas();
+
+                haettu_asiakas.setAsiakasID(tulos.getInt(1));
+                haettu_asiakas.setNimi(tulos.getString(2));
+                haettu_asiakas.setPuhelinnumero(tulos.getString(3));
+                haettu_asiakas.setSahkoposti(tulos.getString(4));
+                haettu_asiakas.setOsoite(tulos.getString(5));
+                haettu_asiakas.setYritys(tulos.getString(6));
+
+                asiakkaat.add(haettu_asiakas);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return asiakkaat;
+    }
+
+    public ArrayList<Varaus> haeVaraukset() {
+        ArrayList<Varaus> varaukset = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(url, user, pass)) {
+            Statement s = connection.createStatement();
+            ResultSet tulos = s.executeQuery("SELECT * FROM ASIAKKAAT");
+            while (tulos.next()) {
+                Varaus haettu_varaus = new Varaus();
+
+                haettu_varaus.setVarausID(tulos.getInt(1));
+                haettu_varaus.setKestoPaivia(tulos.getInt(2));
+                haettu_varaus.setAsiakasID(tulos.getInt(3));
+                haettu_varaus.setMokkiID(tulos.getInt(4));
+                haettu_varaus.setHenkilomaara(tulos.getInt(5));
+                haettu_varaus.setToiveet(tulos.getString(6));
+                haettu_varaus.setAsiakaspalvelijaID(tulos.getInt(7));
+                haettu_varaus.setAloitusPvm(tulos.getDate(8));
+                haettu_varaus.setLopetusPvm(tulos.getDate(9));
+                haettu_varaus.setVarauksenTila(tulos.getString(10));
+
+                varaukset.add(haettu_varaus);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return varaukset;
+    }
+
     public void poistaMokki(Mokki mokki) {
         try (Connection connection = DriverManager.getConnection(url, user, pass)) {
             String sql = "DELETE FROM MOKIT  WHERE mokki_id=?";
