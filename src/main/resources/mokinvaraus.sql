@@ -1,12 +1,17 @@
+DROP TABLE VARAUKSET;
+DROP TABLE MOKIT;
+DROP TABLE ASIAKKAAT;
+DROP TABLE ASIAKASPALVELIJAT;
+
 CREATE TABLE IF NOT EXISTS MOKIT(
     mokki_id int PRIMARY KEY,
     nimi varchar(255) not null,
     hinta_vrk int,
     sijainti varchar(255) not null,
     henkilomaara int,
-    mukavuudet varchar(255) not null,
+    mukavuudet varchar(2048) not null,
     koko_m2 int,
-    kuvaus varchar(255) not null
+    kuvaus varchar(2048) not null
 );
 
 CREATE TABLE IF NOT EXISTS ASIAKKAAT(
@@ -73,3 +78,6 @@ INSERT INTO MOKIT (mokki_id, nimi, hinta_vrk, sijainti, henkilomaara, mukavuudet
 VALUES (8, 'Mustikkarinne', 350, 'Porvarienpolku 1', 12, '5G ja valokuitunetti, ilmastointi, 8K-televisio, mikroaaltouuni, liesi, uuni, jääkaappi, vedenkeitin,
 kahvinkeitin, kuivauskaappi, sisä- ja ulkoporeallas, palju, älykäs viihdejärjestelmä, isot ikkunat, moderni keittiö, viinikaappi, kylpyamme, neljä suihkua, luxus-sauna.', 240,
         'Luksusta pursuava ja katseita keräävä mökki kaikilla mausteilla ja aivan upealla järvimaisemalla.');
+
+INSERT INTO ASIAKASPALVELIJAT (asiakaspalvelija_id, nimi, sahkoposti, puhelinnumero)
+VALUES (1, 'Tomppa', 'tomppa@mokkikodit.fi', '0440339999');

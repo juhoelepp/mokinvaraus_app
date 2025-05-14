@@ -7,9 +7,12 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Kayttoliittyma implements Initializable {
+    private Tietokanta tietokanta;
+
     @FXML
     private Tab Tab1, Tab2, Tab3, Tab4, Tab5;
 
@@ -151,9 +154,13 @@ public class Kayttoliittyma implements Initializable {
     private ComboBox<String> mokki2CB;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String[] vuokrattavatmokit = {"Mökki 1", "Mökki 2", "Mökki 3", "Mökki 4", "Mökki 5", "Mökki 6", "Mökki 7", "Mökki 8", "Mökki 9", "Mökki 10", "Mökki 11", "Mökki 12"};
-        mokkiCB.getItems().addAll(vuokrattavatmokit);
-        mokki2CB.getItems().addAll(vuokrattavatmokit);
+        tietokanta = new Tietokanta();
+        ArrayList<Mokki> vuokrattavatmokit = tietokanta.haeMokit();
+
+        for (Mokki mokki : vuokrattavatmokit) {
+            mokkiCB.getItems().add(mokki.getNimi());
+            mokki2CB.getItems().add(mokki.getNimi());
+        }
     }
 
     @FXML
