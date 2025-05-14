@@ -38,7 +38,7 @@ public class KirjautumisController {
             tietokirjautumisesta.setText("Täytä kaikki kentät ennen kirjautumista");
         } else if (annettuTunnus.equals(OikeaKayttajatunnus) && annettuSalasana.equals(OikeaSalasana)) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Kayttoliittyma.fxml"));
                 Parent root = loader.load();
                 Stage stage = (Stage) kirjautumisbt.getScene().getWindow();
                 stage.setScene(new Scene(root));
