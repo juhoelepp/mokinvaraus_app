@@ -3,14 +3,19 @@ package ot1.mokinvaraus_app;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Kayttoliittyma implements Initializable {
     Tietokanta tietokanta;
+    ArrayList<Mokki> mokit;
+    ArrayList<Varaus> varaukset;
+    ArrayList<Asiakas> asiakkaat;
 
     @FXML
     private Tab Tab1, Tab2, Tab3, Tab4, Tab5;
@@ -64,13 +69,19 @@ public class Kayttoliittyma implements Initializable {
     private TextField hlomaaraTF;
 
     @FXML
+    private TextField hlomaaraTF2;
+
+    @FXML
+    private TextArea toiveetTF;
+
+    @FXML
     private TextField neliomaaraTF;
 
     @FXML
-    private TextArea mukavuudetTF;
+    private TextArea mukavuudetTA;
 
     @FXML
-    private TextArea kuvausTF;
+    private TextArea kuvausTA;
 
     @FXML
     private TextField etunimi3TF;
@@ -153,38 +164,96 @@ public class Kayttoliittyma implements Initializable {
     private ComboBox<String> mokki2CB;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Tietokanta tietokanta = new Tietokanta();
-        ArrayList<Mokki> vuokrattavatmokit = tietokanta.haeMokit();
+        tietokanta = new Tietokanta();
+        mokit = tietokanta.haeMokit();
+        varaukset = tietokanta.haeVaraukset();
+        asiakkaat = tietokanta.haeAsiakkaat();
 
-        for (Mokki mokki : vuokrattavatmokit) {
+        for (Mokki mokki : mokit) {
             mokkiCB.getItems().add(mokki.getNimi());
             mokki2CB.getItems().add(mokki.getNimi());
+
+            mokkilistaLW.getItems().add(mokki.getNimi());
         }
     }
 
     @FXML
-    private void varaustentuplaklikkaus() {
-        varaustenlistaLW.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                muokattavienlaskujemaara = laskujenlistaLW.getSelectionModel().getSelectedIndex();
-                String valittu = varaustenlistaLW.getSelectionModel().getSelectedItem();
-                if (valittu != null) {
-                    taytavarauskentat(valittu);
-                }
+    private void varaustentuplaklikkaus(MouseEvent event) {
+        if (event.getClickCount() == 2) {
+            muokattavienlaskujemaara = laskujenlistaLW.getSelectionModel().getSelectedIndex();
+            String valittu = varaustenlistaLW.getSelectionModel().getSelectedItem();
+            if (valittu != null) {
+                taytavarauskentat(valittu);
             }
-        });
+        }
 
         listanmuokkaus();
+    }
+
+    @FXML
+    private void mokkientuplaklikkaus(MouseEvent event) {
+        if (event.getClickCount() == 2) {
+            String valittu = mokkilistaLW.getSelectionModel().getSelectedItem();
+            if (valittu != null) {
+                for (Mokki mokki : mokit) {
+                    if (mokki.getNimi().equals(valittu)) {
+                        taytamokkikentat(mokki);
+                    }
+                }
+            }
+        }
     }
 
     @FXML
     private void listanmuokkaus() {
     }
 
+    private int luoAsiakas() {
+        Asiakas uusi_asiakas = new Asiakas();
+        int asiakas_id = asiakkaat.size() + 1;
+        uusi_asiakas.setAsiakasID(asiakas_id);
+        uusi_asiakas.setNimi(etunimiTF.getText() + " " + sukunimiTF.getText());
+        uusi_asiakas.setPuhelinnumero(puhnroTF.getText());
+        uusi_asiakas.setSahkoposti(spostiTF.getText());
+        uusi_asiakas.setOsoite(osoiteTF.getText());
+        uusi_asiakas.setYritys(yritysTF.getText());
+
+        asiakkaat.add(uusi_asiakas);
+        tietokanta.lisaaAsiakas(uusi_asiakas);
+
+        return asiakas_id;
+    }
+
     @FXML
-    private void varauksenluonti() {
-        varaustenlistaLW.getItems().add(toString());
-        paivitatilastot();
+    private void luovaraus() {
+        try {
+            Varaus uusi_varaus = new Varaus();
+            uusi_varaus.setVarausID(varaukset.size() + 1);
+            LocalDate aloitus_pvm = alkuDP.getValue();
+            LocalDate lopetus_pvm = lopetusDP.getValue();
+            uusi_varaus.setKestoPaivia((int) ChronoUnit.DAYS.between(aloitus_pvm, lopetus_pvm));
+            uusi_varaus.setAsiakasID(luoAsiakas());
+            String varattava_mokki = mokkiCB.getValue();
+            for (Mokki mokki : mokit) {
+                if (mokki.getNimi().equals(varattava_mokki)) {
+                    uusi_varaus.setMokkiID(mokki.getMokkiID());
+                }
+            }
+            uusi_varaus.setHenkilomaara(Integer.parseInt(hlomaaraTF.getText()));
+            uusi_varaus.setToiveet(toiveetTF.getText());
+            uusi_varaus.setAsiakaspalvelijaID(1);
+            uusi_varaus.setAloitusPvm(Date.valueOf(alkuDP.getValue()));
+            uusi_varaus.setLopetusPvm(Date.valueOf(lopetusDP.getValue()));
+            uusi_varaus.setVarauksenTila("Varattu.");
+
+            varaukset.add(uusi_varaus);
+            tietokanta.luoVaraus(uusi_varaus);
+
+            varaustenlistaLW.getItems().add(haeVaraukseenSyotetytTiedot());
+            paivitatilastot();
+        } catch (Exception e) {
+            System.out.println("Varauksen luonti epäonnistui.");
+        }
     }
 
     private void taytavarauskentat(String tieto) {
@@ -203,6 +272,20 @@ public class Kayttoliittyma implements Initializable {
             }
         } catch (Exception e) {
             System.out.println("Tiedoja ei täytetty oikein.");
+        }
+    }
+
+    private void taytamokkikentat(Mokki mokki) {
+        try {
+            mokinnimiTF.setText(mokki.getNimi());
+            vrkhintaTF.setText(Integer.toString(mokki.getHintaVrk()));
+            sijaintiTF.setText(mokki.getSijainti());
+            hlomaaraTF2.setText(Integer.toString(mokki.getHenkilomaara()));
+            mukavuudetTA.setText(mokki.getMukavuudet());
+            neliomaaraTF.setText(Integer.toString(mokki.getKokoM2()));
+            kuvausTA.setText(mokki.getKuvaus());
+        } catch (Exception e) {
+            System.out.println("Tietoja ei täytetty oikein.");
         }
     }
 
@@ -236,8 +319,7 @@ public class Kayttoliittyma implements Initializable {
         }
     }
 
-    @Override
-    public String toString() {
+    public String haeVaraukseenSyotetytTiedot() {
         return "Etunimi: " + etunimiTF.getText() + "\n" +
                 "Sukunimi: " + sukunimiTF.getText() + "\n" +
                 "Puhelinnumero: " + puhnroTF.getText() + "\n" +

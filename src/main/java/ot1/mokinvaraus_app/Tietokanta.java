@@ -178,11 +178,10 @@ public class Tietokanta {
                 ps.setInt(4, varaus.getMokkiID());
                 ps.setInt(5, varaus.getHenkilomaara());
                 ps.setString(6, varaus.getToiveet());
-                ps.setString(7, varaus.getToiveet());
-                ps.setInt(8, varaus.getAsiakaspalvelijaID());
-                ps.setDate(9, varaus.getAloitusPvm());
-                ps.setDate(10, varaus.getLopetusPvm());
-                ps.setString(11, varaus.getVarauksenTila());
+                ps.setInt(7, varaus.getAsiakaspalvelijaID());
+                ps.setDate(8, varaus.getAloitusPvm());
+                ps.setDate(9, varaus.getLopetusPvm());
+                ps.setString(10, varaus.getVarauksenTila());
 
                 int rowsAffected = ps.executeUpdate();
                 System.out.println("Inserted " + rowsAffected + " row(s).");

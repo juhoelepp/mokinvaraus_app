@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ot1.mokinvaraus_app.Kayttoliittyma">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ot1.mokinvaraus_app.Kayttoliittyma">
     <children>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -35,8 +35,10 @@
                                         <TextField fx:id="yritysTF" promptText="Yritys (jos on)" />
                                         <DatePicker fx:id="alkuDP" promptText="Alku pvm." />
                                         <DatePicker fx:id="lopetusDP" promptText="Lopetus pvm." />
+                                        <TextField fx:id="hlomaaraTF" promptText="Henkilömäärä" />
+                                        <TextArea fx:id="toiveetTF" prefHeight="200.0" prefWidth="200.0" promptText="Toiveet" />
                                         <ComboBox fx:id="mokkiCB" prefWidth="150.0" promptText="Mökki" />
-                                        <Button fx:id="luovarausBut" mnemonicParsing="false" onAction="#varauksenluonti" text="LUO VARAUS" />
+                                        <Button fx:id="luovarausBut" mnemonicParsing="false" onAction="#luovaraus" text="LUO VARAUS" />
                                         <Button fx:id="luolaskuBut" mnemonicParsing="false" onAction="#luolasku" text="LUO LASKU" />
                                     </children>
                                     <opaqueInsets>
@@ -96,7 +98,7 @@
                                     <items>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                             <children>
-                                                <ListView fx:id="mokkilistaLW" prefHeight="370.0" prefWidth="357.0" />
+                                                <ListView fx:id="mokkilistaLW" onMouseClicked="#mokkientuplaklikkaus" prefHeight="370.0" prefWidth="357.0" />
                                             </children>
                                         </AnchorPane>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -106,7 +108,7 @@
                                                         <TextField fx:id="mokinnimiTF" promptText="Mökin nimi" />
                                                         <TextField fx:id="vrkhintaTF" promptText="Hinta (vrk)" />
                                                         <TextField fx:id="sijaintiTF" promptText="Sijainti" />
-                                                        <TextField fx:id="hlomaaraTF" promptText="Henkilömäärä" />
+                                                        <TextField fx:id="hlomaaraTF2" promptText="Henkilömäärä" />
                                                         <TextField fx:id="neliomaaraTF" promptText="Koko (m^2)" />
                                                         <TextArea fx:id="mukavuudetTA" prefHeight="52.0" prefWidth="237.0" promptText="Mukavuudet" />
                                                         <TextArea fx:id="kuvausTA" prefHeight="61.0" prefWidth="237.0" promptText="Kuvaus" />
@@ -161,4 +163,3 @@
         </TabPane>
     </children>
 </StackPane>
-
