@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class kirjatumiscontroller {
+public class KirjautumisController {
 
     private static final String OikeaKayttajatunnus = "Mokkikodit";
     private static final String OikeaSalasana = "123456";
