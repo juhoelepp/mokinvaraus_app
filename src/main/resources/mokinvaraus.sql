@@ -42,7 +42,34 @@ CREATE TABLE IF NOT EXISTS VARAUKSET(
 );
 
 INSERT INTO MOKIT (mokki_id, nimi, hinta_vrk, sijainti, henkilomaara, mukavuudet, koko_m2, kuvaus)
-VALUES (1, 'Mökki Makkonen', 200, 'Saariselkä', 5, 'Jotain.', 104, 'Makkosen mökki.');
+VALUES (1, 'Metsämaa', 80, 'Mökkikodit-lomakylä', 4, 'Televisio, mikroaaltouuni, liesi, uuni, jääkaappi, vedenkeitin, kahvinkeitin, kuivauskaappi, sauna.',
+        56, 'Kotoisa perinteikäs mökki luonnon helmassa.');
 
 INSERT INTO MOKIT (mokki_id, nimi, hinta_vrk, sijainti, henkilomaara, mukavuudet, koko_m2, kuvaus)
-VALUES (2, 'Mökki Kakkonen', 200, 'Kalajoki', 3, 'Jotain.', 74, 'Kakkosen mökki.');
+VALUES (2, 'Metsäkoto', 80, 'Mökkikodit-lomakylä', 4, 'Televisio, mikroaaltouuni, liesi, uuni, jääkaappi, vedenkeitin, kahvinkeitin, kuivauskaappi, sauna.',
+        56, 'Kotoisa perinteikäs mökki luonnon helmassa.');
+
+INSERT INTO MOKIT (mokki_id, nimi, hinta_vrk, sijainti, henkilomaara, mukavuudet, koko_m2, kuvaus)
+VALUES (3, 'Metsän vartija', 100, 'Mökkikodit-lomakylä', 5, 'Ilmainen Wi-Fi, ilmastointi, televisio, mikroaaltouuni, liesi, uuni, jääkaappi,
+vedenkeitin, kahvinkeitin, kuivauskaappi, sauna.', 74, 'Siisti mökki perustarpeilla kallion päällä.');
+
+INSERT INTO MOKIT (mokki_id, nimi, hinta_vrk, sijainti, henkilomaara, mukavuudet, koko_m2, kuvaus)
+VALUES (4, 'Mesipolku', 115, 'Mökkikodit-lomakylä', 5, 'Ilmainen Wi-Fi, ilmastointi, televisio, mikroaaltouuni, liesi, uuni, jääkaappi, vedenkeitin,
+kahvinkeitin, kuivauskaappi, sauna', 84, 'Upea mökki kauniissa luonnonmaisemissa.');
+
+INSERT INTO MOKIT (mokki_id, nimi, hinta_vrk, sijainti, henkilomaara, mukavuudet, koko_m2, kuvaus)
+VALUES (5, 'Mörrimöykky', 130, 'Raatteentie 260', 10, 'Ulko-WC, ilmastointi, televisio, mikroaaltouuni, liesi, uuni, jääkaappi, vedenkeitin, sauna',
+        150, 'Vanha jätkänkämppä keskellä erämaata.');
+
+INSERT INTO MOKIT (mokki_id, nimi, hinta_vrk, sijainti, henkilomaara, mukavuudet, koko_m2, kuvaus)
+VALUES (6, 'Myrskyn maja', 150, 'Mökkikodit-lomakylä', 6, 'Kuin hevosaitauksessa konsanaan olisi. Niin no... toki kuin kuningasori.', 110, 'Ykkösen, kakkosen elikkäs hevosmies-Makkosen lemppari mökki. Makkonen suosittelee!');
+
+INSERT INTO MOKIT (mokki_id, nimi, hinta_vrk, sijainti, henkilomaara, mukavuudet, koko_m2, kuvaus)
+VALUES (7, 'Mäntymaja', 240, 'Aatelistonmäki 3', 8, '5G-nettiyhteys, ilmastointi, 70-tuumainen 4K-televisio, mikroaaltouuni, liesi, uuni, jääkaappi, vedenkeitin,
+kahvinkeitin, kuivauskaappi, ulkoporeallas, palju, viihdejärjestelmä, isot ikkunat, moderni keittiö, kylpyamme, kaksi suihkua, puusauna.', 140,
+        'Hulppea, yleellinen ja vasta valmistunut mökki hienoilla herkuilla ja hyvillä yhteyksillä.');
+
+INSERT INTO MOKIT (mokki_id, nimi, hinta_vrk, sijainti, henkilomaara, mukavuudet, koko_m2, kuvaus)
+VALUES (8, 'Mustikkarinne', 350, 'Porvarienpolku 1', 12, '5G ja valokuitunetti, ilmastointi, 8K-televisio, mikroaaltouuni, liesi, uuni, jääkaappi, vedenkeitin,
+kahvinkeitin, kuivauskaappi, sisä- ja ulkoporeallas, palju, älykäs viihdejärjestelmä, isot ikkunat, moderni keittiö, viinikaappi, kylpyamme, neljä suihkua, luxus-sauna.', 240,
+        'Luksusta pursuava ja katseita keräävä mökki kaikilla mausteilla ja aivan upealla järvimaisemalla.');
