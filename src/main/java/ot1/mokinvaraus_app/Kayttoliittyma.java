@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
-public class HelloController implements Initializable {
+public class Kayttoliittyma implements Initializable {
     @FXML
     private Tab Tab1, Tab2, Tab3, Tab4, Tab5;
 
