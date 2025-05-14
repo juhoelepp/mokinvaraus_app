@@ -7,7 +7,7 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Kayttoliittyma implements Initializable {
     @FXML
@@ -151,7 +151,7 @@ public class Kayttoliittyma implements Initializable {
     private ComboBox<String> mokki2CB;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String[] vuokrattavatmokit = {"Mökki 1", "Mökki 2", "Mökki 3", "Mökki 4", "Mökki 5", "Mökki 6", "Mökki 7", "Mökki 8", "Mökki 9", "Mökki 10", "Mökki 11", "Mökki 12"};
+        String[] vuokrattavatmokit = {"Metsämaa", "Metsäkoto", "Metsän vartija", "Mesipolku", "Mörrimöykky", "Myrskyn maja", "Mäntymaja", "Mustikkarinne"};
         mokkiCB.getItems().addAll(vuokrattavatmokit);
         mokki2CB.getItems().addAll(vuokrattavatmokit);
     }
@@ -178,6 +178,7 @@ public class Kayttoliittyma implements Initializable {
     @FXML
     private void varauksenluonti() {
         varaustenlistaLW.getItems().add(toString());
+        paivitatilastot();
     }
 
     private void taytavarauskentat(String tieto) {
@@ -241,6 +242,7 @@ public class Kayttoliittyma implements Initializable {
                 "Lopetus pvm: " + lopetusDP.getValue() + "\n" +
                 "Mökki: " + mokkiCB.getValue();
     }
+
     @FXML
     private void luolasku() {
         try {
@@ -276,6 +278,7 @@ public class Kayttoliittyma implements Initializable {
             System.out.println("Laskua ei luotu. Kokeile uudelleen.");
         }
     }
+
     @FXML
     private void poistalasku() {
         int varauslista = laskujenlistaLW.getSelectionModel().getSelectedIndex();
@@ -285,6 +288,7 @@ public class Kayttoliittyma implements Initializable {
             System.out.println("Laskua ei poistettu. Tuplaklikkaa poistettavaa laskua ja kokeile uudelleen.");
         }
     }
+
     @FXML
     private void tallennalasku() {
         if (muokattavienlaskujemaara >= 0) {
@@ -300,6 +304,7 @@ public class Kayttoliittyma implements Initializable {
             muokattavienlaskujemaara = -1;
         }
     }
+
     @FXML
     private int muokattavienlaskujemaara;
 
@@ -315,9 +320,10 @@ public class Kayttoliittyma implements Initializable {
             vrkaikaTF.setText(rivit[5].split(":")[1].trim());
             kokhintaTF.setText(rivit[6].split(":")[1].replace("€", "").trim());
         } catch (Exception e) {
-            System.out.println("Laskun kenttien täytössä virhe: ");
+            System.out.println("Laskun kenttien täytössä virhe! Tarkista syöte.");
         }
     }
+
     @FXML
     private void laskujentuplaklikkaus() {
         laskujenlistaLW.setOnMouseClicked(event -> {
@@ -326,12 +332,74 @@ public class Kayttoliittyma implements Initializable {
                 String valittu = laskujenlistaLW.getSelectionModel().getSelectedItem();
                 if (valittu != null) {
                     taytaLaskuKentat(valittu);
+                    laskujenlistaLW.refresh();
                 }
             }
         });
-
         listanmuokkaus();
     }
 
-}
+    public String tilastolista() {
+        int varaustenMaara = varaustenlistaLW.getItems().size();
 
+        double kokonaisOleskelu = 0;
+        double kokonaistuotto = 0;
+        Map<String, Integer> varausMaaraPerMokki = new HashMap<>();
+        Map<String, Double> tuottoPerMokki = new HashMap<>();
+
+        for (String lasku : laskujenlistaLW.getItems()) {
+            String[] rivit = lasku.split("\n");
+            String mokki = "";
+            double hinta = 0;
+            int vrkMaara = 0;
+
+            for (String rivi : rivit) {
+                if (rivi.startsWith("Mökin nimi:")) {
+                    mokki = rivi.split(":")[1].trim();
+                } else if (rivi.startsWith("Hinta (vrk):")) {
+                    String poistetaaneuro = rivi.split(":")[1].replace("€", "").trim();
+                    hinta = Double.parseDouble(poistetaaneuro);
+                } else if (rivi.startsWith("Aika (vrk):")) {
+                    vrkMaara = Integer.parseInt(rivi.split(":")[1].trim());
+                }
+            }
+
+            kokonaisOleskelu += vrkMaara;
+            double tuotto = hinta * vrkMaara;
+            kokonaistuotto += tuotto;
+
+            varausMaaraPerMokki.put(mokki, varausMaaraPerMokki.getOrDefault(mokki, 0) + 1);
+            tuottoPerMokki.put(mokki, tuottoPerMokki.getOrDefault(mokki, 0.0) + tuotto);
+        }
+
+        double keskimOleskelu = varaustenMaara > 0 ? kokonaisOleskelu / varaustenMaara : 0;
+        double keskimTuotto = varaustenMaara > 0 ? kokonaistuotto / varaustenMaara : 0;
+
+        StringBuilder raportti = new StringBuilder();
+        raportti.append("Kaikkien varausten määrä: ").append(varaustenMaara).append("\n");
+        raportti.append("Keskimääräinen oleskelun kesto: ").append(String.format("%.1f", keskimOleskelu)).append(" päivää\n");
+
+        raportti.append("Varausmäärät per mökki:\n");
+        for (String mokki : varausMaaraPerMokki.keySet()) {
+            raportti.append(" - ").append(mokki).append(": ").append(varausMaaraPerMokki.get(mokki)).append(" varausta\n");
+        }
+
+        raportti.append("Kokonaistuotto: ").append(String.format("%.2f", kokonaistuotto)).append(" €\n");
+
+        raportti.append("Tuotto per mökki:\n");
+        for (String mokki : tuottoPerMokki.keySet()) {
+            raportti.append(" - ").append(mokki).append(": ").append(String.format("%.2f", tuottoPerMokki.get(mokki))).append(" €\n");
+        }
+
+        raportti.append("Keskimääräinen tuotto per varaus: ").append(String.format("%.2f", keskimTuotto)).append(" €\n");
+
+        return raportti.toString();
+    }
+
+    private void paivitatilastot(){
+        raportointilistaLW.getItems().clear();
+        String[] rivit = tilastolista().split("\n");
+        raportointilistaLW.getItems().addAll(Arrays.asList(rivit));
+    }
+
+}
