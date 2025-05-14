@@ -10,6 +10,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Kayttoliittyma implements Initializable {
+    Tietokanta tietokanta;
+
     @FXML
     private Tab Tab1, Tab2, Tab3, Tab4, Tab5;
 
@@ -151,9 +153,13 @@ public class Kayttoliittyma implements Initializable {
     private ComboBox<String> mokki2CB;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String[] vuokrattavatmokit = {"Metsämaa", "Metsäkoto", "Metsän vartija", "Mesipolku", "Mörrimöykky", "Myrskyn maja", "Mäntymaja", "Mustikkarinne"};
-        mokkiCB.getItems().addAll(vuokrattavatmokit);
-        mokki2CB.getItems().addAll(vuokrattavatmokit);
+        Tietokanta tietokanta = new Tietokanta();
+        ArrayList<Mokki> vuokrattavatmokit = tietokanta.haeMokit();
+
+        for (Mokki mokki : vuokrattavatmokit) {
+            mokkiCB.getItems().add(mokki.getNimi());
+            mokki2CB.getItems().add(mokki.getNimi());
+        }
     }
 
     @FXML

@@ -65,7 +65,7 @@ public class Tietokanta {
 
         try (Connection connection = DriverManager.getConnection(url, user, pass)) {
             Statement s = connection.createStatement();
-            ResultSet tulos = s.executeQuery("SELECT * FROM ASIAKKAAT");
+            ResultSet tulos = s.executeQuery("SELECT * FROM VARAUKSET");
             while (tulos.next()) {
                 Varaus haettu_varaus = new Varaus();
 
