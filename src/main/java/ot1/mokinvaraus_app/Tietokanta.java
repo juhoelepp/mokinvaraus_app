@@ -89,34 +89,45 @@ public class Tietokanta {
         return varaukset;
     }
 
-    public void poistaMokki(Mokki mokki) {
+    public ArrayList<Lasku> haeLaskut() {
+        ArrayList<Lasku> laskut = new ArrayList<>();
+
         try (Connection connection = DriverManager.getConnection(url, user, pass)) {
-            String sql = "DELETE FROM MOKIT  WHERE mokki_id=?";
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1, mokki.getMokkiID());
-                ps.executeUpdate();
+            Statement s = connection.createStatement();
+            ResultSet tulos = s.executeQuery("SELECT * FROM LASKUT");
+            while (tulos.next()) {
+                Lasku haettu_lasku = new Lasku();
+
+                haettu_lasku.setLaskuID(tulos.getInt(1));
+                haettu_lasku.setAsiakasID(tulos.getInt(2));
+                haettu_lasku.setMokkiID(tulos.getInt(3));
+                haettu_lasku.setKokonaishinta(tulos.getInt(4));
+                haettu_lasku.setVarausID(tulos.getInt(5));
+
+                laskut.add(haettu_lasku);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
 
-    public void lisaaMokki(Mokki mokki) {
+        return laskut;
+    }
+    
+    public void paivitaMokki(Mokki mokki) {
         try (Connection connection = DriverManager.getConnection(url, user, pass)) {
-            String sql = "INSERT INTO MOKIT (mokki_id, nimi, hinta_vrk, sijainti, henkilomaara, mukavuudet, koko_m2, kuvaus) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "UPDATE MOKIT SET nimi=?, hinta_vrk=?, sijainti=?, henkilomaara=?, mukavuudet=?, koko_m2=?, kuvaus=? WHERE mokki_id=?";
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1, mokki.getMokkiID());
-                ps.setString(2, mokki.getNimi());
-                ps.setDouble(3, mokki.getHintaVrk());
-                ps.setString(4, mokki.getSijainti());
-                ps.setInt(5, mokki.getHenkilomaara());
-                ps.setString(6, mokki.getMukavuudet());
-                ps.setDouble(7, mokki.getKokoM2());
-                ps.setString(8, mokki.getKuvaus());
+                ps.setString(1, mokki.getNimi());
+                ps.setDouble(2, mokki.getHintaVrk());
+                ps.setString(3, mokki.getSijainti());
+                ps.setInt(4, mokki.getHenkilomaara());
+                ps.setString(5, mokki.getMukavuudet());
+                ps.setDouble(6, mokki.getKokoM2());
+                ps.setString(7, mokki.getKuvaus());
+                ps.setInt(8, mokki.getMokkiID());
 
                 int rowsAffected = ps.executeUpdate();
-                System.out.println("Inserted " + rowsAffected + " row(s).");
+                System.out.println("Updated " + rowsAffected + " row(s).");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -128,7 +139,9 @@ public class Tietokanta {
             String sql = "DELETE FROM ASIAKKAAT  WHERE asiakas_id=?";
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, asiakas.getAsiakasID());
-                ps.executeUpdate();
+
+                int rowsAffected = ps.executeUpdate();
+                System.out.println("Deleted " + rowsAffected + " row(s).");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -160,14 +173,16 @@ public class Tietokanta {
             String sql = "DELETE FROM VARAUKSET  WHERE varaus_id=?";
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, varaus.getVarausID());
-                ps.executeUpdate();
+
+                int rowsAffected = ps.executeUpdate();
+                System.out.println("Deleted " + rowsAffected + " row(s).");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void luoVaraus(Varaus varaus) {
+    public void lisaaVaraus(Varaus varaus) {
         try (Connection connection = DriverManager.getConnection(url, user, pass)) {
             String sql = "INSERT INTO VARAUKSET (varaus_id, kesto_paivia, asiakas_id, mokki_id, henkilomaara, toiveet, asiakaspalvelija_id, aloitus_pvm, lopetus_pvm, varauksen_tila) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -190,4 +205,79 @@ public class Tietokanta {
             e.printStackTrace();
         }
     }
+
+    public void paivitaVaraus(Varaus varaus) {
+        try (Connection connection = DriverManager.getConnection(url, user, pass)) {
+            String sql = "UPDATE VARAUKSET SET kesto_paivia=?, asiakas_id=?, mokki_id=?, henkilomaara=?, toiveet=?, asiakaspalvelija_id=?, aloitus_pvm=?, lopetus_pvm=?, varauksen_tila=? WHERE varaus_id=?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, varaus.getKestoPaivia());
+                ps.setInt(2, varaus.getAsiakasID());
+                ps.setInt(3, varaus.getMokkiID());
+                ps.setInt(4, varaus.getHenkilomaara());
+                ps.setString(5, varaus.getToiveet());
+                ps.setInt(6, varaus.getAsiakaspalvelijaID());
+                ps.setDate(7, varaus.getAloitusPvm());
+                ps.setDate(8, varaus.getLopetusPvm());
+                ps.setString(9, varaus.getVarauksenTila());
+                ps.setInt(10, varaus.getVarausID());
+
+                int rowsAffected = ps.executeUpdate();
+                System.out.println("Updated " + rowsAffected + " row(s).");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void poistaLasku(Lasku lasku) {
+        try (Connection connection = DriverManager.getConnection(url, user, pass)) {
+            String sql = "DELETE FROM LASKUT WHERE lasku_id=?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, lasku.getVarausID());
+
+                int rowsAffected = ps.executeUpdate();
+                System.out.println("Deleted " + rowsAffected + " row(s).");
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void lisaaLasku(Lasku lasku) {
+        try (Connection connection = DriverManager.getConnection(url, user, pass)) {
+            String sql = "INSERT INTO LASKUT (lasku_id, asiakas_id, mokki_id, kokonaishinta, varaus_id) values (?, ?, ?, ?, ?)";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, lasku.getLaskuID());
+                ps.setInt(2, lasku.getAsiakasID());
+                ps.setInt(3, lasku.getMokkiID());
+                ps.setInt(4, lasku.getKokonaishinta());
+                ps.setInt(5, lasku.getVarausID());
+
+                int rowsAffected = ps.executeUpdate();
+                System.out.println("Inserted " + rowsAffected + " row(s).");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void paivitaLasku(Lasku lasku) {
+        try (Connection connection = DriverManager.getConnection(url, user, pass)) {
+            String sql = "UPDATE LASKUT SET asiakas_id=?, mokki_id=?, kokonaishinta=?, varaus_id=? WHERE lasku_id=?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, lasku.getAsiakasID());
+                ps.setInt(2, lasku.getMokkiID());
+                ps.setInt(3, lasku.getKokonaishinta());
+                ps.setInt(4, lasku.getVarausID());
+                ps.setInt(5, lasku.getLaskuID());
+
+                int rowsAffected = ps.executeUpdate();
+                System.out.println("Updated " + rowsAffected + " row(s).");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

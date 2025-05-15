@@ -33,13 +33,12 @@
                                         <TextField fx:id="spostiTF" promptText="Sähköposti" />
                                         <TextField fx:id="osoiteTF" promptText="Osoite" />
                                         <TextField fx:id="yritysTF" promptText="Yritys (jos on)" />
-                                        <DatePicker fx:id="alkuDP" promptText="Alku pvm." />
-                                        <DatePicker fx:id="lopetusDP" promptText="Lopetus pvm." />
                                         <TextField fx:id="hlomaaraTF" promptText="Henkilömäärä" />
                                         <TextArea fx:id="toiveetTF" prefHeight="200.0" prefWidth="200.0" promptText="Toiveet" />
+                                        <DatePicker fx:id="alkuDP" promptText="Alku pvm." />
+                                        <DatePicker fx:id="lopetusDP" promptText="Lopetus pvm." />
                                         <ComboBox fx:id="mokkiCB" prefWidth="150.0" promptText="Mökki" />
-                                        <Button fx:id="luovarausBut" mnemonicParsing="false" onAction="#luovaraus" text="LUO VARAUS" />
-                                        <Button fx:id="luolaskuBut" mnemonicParsing="false" onAction="#luolasku" text="LUO LASKU" />
+                                        <Button fx:id="luovarausBut" mnemonicParsing="false" onAction="#luovaraus" text="LUO VARAUS JA LASKU" />
                                     </children>
                                     <opaqueInsets>
                                         <Insets />
@@ -58,27 +57,29 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <SplitPane dividerPositions="0.5" prefHeight="371.0" prefWidth="600.0">
+                                <SplitPane dividerPositions="0.5" prefHeight="471.0" prefWidth="600.0">
                                     <items>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="369.0" prefWidth="337.0">
                                             <children>
-                                                <ListView prefHeight="370.0" prefWidth="297.0" />
-                                                <ListView fx:id="varaustenlistaLW" editable="true" layoutX="-1.0" onMouseClicked="#varaustentuplaklikkaus" prefHeight="366.0" prefWidth="301.0" />
+                                                <ListView prefHeight="470.0" prefWidth="297.0" />
+                                                <ListView fx:id="varaustenlistaLW" editable="true" layoutX="-1.0" onMouseClicked="#varaustentuplaklikkaus" prefHeight="470.0" prefWidth="301.0" />
                                             </children>
                                         </AnchorPane>
                                         <VBox prefHeight="258.0" prefWidth="296.0" spacing="5.0">
                                             <children>
-                                                <TextField fx:id="etunimi2TF" promptText="Etunimi" />
-                                                <TextField fx:id="sukunimi2TF" promptText="Sukunimi" />
-                                                <TextField fx:id="puhnro2TF" promptText="Puhelin nro." />
-                                                <TextField fx:id="sposti2TF" promptText="Sähköposti" />
-                                                <TextField fx:id="osoite2TF" promptText="Osoite" />
-                                                <TextField fx:id="yritys2TF" promptText="Yritys (jos on)" />
+                                                <TextField fx:id="etunimi2TF" editable="false" promptText="Etunimi" />
+                                                <TextField fx:id="sukunimi2TF" editable="false" promptText="Sukunimi" />
+                                                <TextField fx:id="puhnro2TF" editable="false" promptText="Puhelin nro." />
+                                                <TextField fx:id="sposti2TF" editable="false" promptText="Sähköposti" />
+                                                <TextField fx:id="osoite2TF" editable="false" promptText="Osoite" />
+                                                <TextField fx:id="yritys2TF" editable="false" promptText="Yritys (jos on)" />
+                                                <TextField fx:id="hlomaaraTF2" promptText="Henkilömäärä" />
+                                                <TextArea fx:id="toiveetTF2" prefHeight="30.0" prefWidth="296.0" promptText="Toiveet" />
                                                 <DatePicker fx:id="alku2DP" promptText="Alku pvm." />
                                                 <DatePicker fx:id="lopetus2DP" promptText="Lopetus pvm." />
                                                 <ComboBox fx:id="mokki2CB" prefWidth="150.0" promptText="Mökki" />
                                                 <Button fx:id="peruutavarausBut" mnemonicParsing="false" onAction="#poistavaraus" text="PERU/POISTA" />
-                                                <Button fx:id="tallennavarausBut" mnemonicParsing="false" onAction="#muokkauksentallennus" text="TALLENNA" />
+                                                <Button fx:id="tallennavarausBut" mnemonicParsing="false" onAction="#varauksenMuokkauksenTallennus" text="TALLENNA" />
                                             </children>
                                             <opaqueInsets>
                                                 <Insets />
@@ -94,11 +95,11 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <SplitPane dividerPositions="0.6003344481605352" prefHeight="371.0" prefWidth="600.0">
+                                <SplitPane dividerPositions="0.6003344481605352" prefHeight="471.0" prefWidth="600.0">
                                     <items>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="356.0">
                                             <children>
-                                                <ListView fx:id="mokkilistaLW" onMouseClicked="#mokkientuplaklikkaus" prefHeight="370.0" prefWidth="357.0" />
+                                                <ListView fx:id="mokkilistaLW" onMouseClicked="#mokkientuplaklikkaus" prefHeight="470.0" prefWidth="357.0" />
                                             </children>
                                         </AnchorPane>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -108,12 +109,11 @@
                                                         <TextField fx:id="mokinnimiTF" promptText="Mökin nimi" />
                                                         <TextField fx:id="vrkhintaTF" promptText="Hinta (vrk)" />
                                                         <TextField fx:id="sijaintiTF" promptText="Sijainti" />
-                                                        <TextField fx:id="hlomaaraTF2" promptText="Henkilömäärä" />
+                                                        <TextField fx:id="hlomaaraTF3" promptText="Henkilömäärä" />
                                                         <TextField fx:id="neliomaaraTF" promptText="Koko (m^2)" />
                                                         <TextArea fx:id="mukavuudetTA" prefHeight="52.0" prefWidth="237.0" promptText="Mukavuudet" />
                                                         <TextArea fx:id="kuvausTA" prefHeight="61.0" prefWidth="237.0" promptText="Kuvaus" />
-                                                        <Button fx:id="muokkaamokkiBut" mnemonicParsing="false" text="MUOKKAA" />
-                                                        <Button fx:id="tallennamokkiBut" mnemonicParsing="false" text="TALLENNA" />
+                                                        <Button fx:id="muokkaamokkiBut" mnemonicParsing="false" onAction="#mokinMuokkauksenTallennus" text="MUOKKAA" />
                                                     </children>
                                                 </VBox>
                                             </children>
@@ -128,17 +128,16 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <ListView fx:id="laskujenlistaLW" layoutY="1.0" onMouseClicked="#laskujentuplaklikkaus" prefHeight="371.0" prefWidth="386.0" />
-                                <TextField fx:id="etunimi3TF" layoutX="390.0" layoutY="1.0" prefHeight="26.0" prefWidth="196.0" promptText="Etunimi" />
-                                <TextField fx:id="sukunimi3TF" layoutX="390.0" layoutY="35.0" prefHeight="26.0" prefWidth="196.0" promptText="Sukunimi" />
-                                <TextField fx:id="sposti3TF" layoutX="390.0" layoutY="69.0" prefHeight="26.0" prefWidth="196.0" promptText="Sähköposti" />
-                                <TextField fx:id="mokinnimi2TF" layoutX="390.0" layoutY="103.0" prefHeight="26.0" prefWidth="196.0" promptText="Mökin nimi" />
-                                <TextField fx:id="vrkhinta2TF" layoutX="390.0" layoutY="137.0" prefHeight="26.0" prefWidth="196.0" promptText="Hinta (vrk)" />
+                                <ListView fx:id="laskujenlistaLW" layoutY="1.0" onMouseClicked="#laskujentuplaklikkaus" prefHeight="471.0" prefWidth="386.0" />
+                                <TextField fx:id="etunimi3TF" editable="false" layoutX="390.0" layoutY="1.0" prefHeight="26.0" prefWidth="196.0" promptText="Etunimi" />
+                                <TextField fx:id="sukunimi3TF" editable="false" layoutX="390.0" layoutY="35.0" prefHeight="26.0" prefWidth="196.0" promptText="Sukunimi" />
+                                <TextField fx:id="sposti3TF" editable="false" layoutX="390.0" layoutY="69.0" prefHeight="26.0" prefWidth="196.0" promptText="Sähköposti" />
+                                <TextField fx:id="mokinnimi2TF" editable="false" layoutX="390.0" layoutY="103.0" prefHeight="26.0" prefWidth="196.0" promptText="Mökin nimi" />
+                                <TextField fx:id="vrkhinta2TF" editable="false" layoutX="390.0" layoutY="137.0" prefHeight="26.0" prefWidth="196.0" promptText="Hinta (vrk)" />
                                 <TextField fx:id="kokhintaTF" layoutX="390.0" layoutY="208.0" prefHeight="26.0" prefWidth="196.0" promptText="Kokonaishinta" />
-                                <TextField fx:id="vrkaikaTF" layoutX="390.0" layoutY="173.0" prefHeight="26.0" prefWidth="196.0" promptText="Aika (vrk)" />
+                                <TextField fx:id="vrkaikaTF" editable="false" layoutX="390.0" layoutY="173.0" prefHeight="26.0" prefWidth="196.0" promptText="Aika (vrk)" />
                                 <Button fx:id="tallennalaskuBut" layoutX="390.0" layoutY="242.0" mnemonicParsing="false" onAction="#tallennalasku" text="TALLENNA" />
                                 <Button fx:id="poistalaskuBut" layoutX="477.0" layoutY="242.0" mnemonicParsing="false" onAction="#poistalasku" text="POISTA" />
-                                <Button fx:id="maksettuBut" layoutX="390.0" layoutY="278.0" mnemonicParsing="false" style="-fx-background-color: lightgreen;" text="MERKITSE MAKSETUKSI" />
                             </children>
                         </AnchorPane>
                     </content>

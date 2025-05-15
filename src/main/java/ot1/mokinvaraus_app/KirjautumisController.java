@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class KirjautumisController {
 
-    private static final String OikeaKayttajatunnus = "Mokkikodit";
+    private static final String OikeaKayttajatunnus = "mokkikodit";
     private static final String OikeaSalasana = "123456";
 
     @FXML
@@ -31,7 +31,7 @@ public class KirjautumisController {
 
     @FXML
     private void vaihdaikkunaan2() {
-        String annettuTunnus = kayttajatunnus.getText().trim();
+        String annettuTunnus = kayttajatunnus.getText().trim().toLowerCase();
         String annettuSalasana = salasana.getText().trim();
 
         if (kayttajatunnus.getText().isEmpty() || salasana.getText().isEmpty()) {

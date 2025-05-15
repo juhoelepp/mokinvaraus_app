@@ -1,7 +1,8 @@
-DROP TABLE VARAUKSET;
-DROP TABLE MOKIT;
-DROP TABLE ASIAKKAAT;
-DROP TABLE ASIAKASPALVELIJAT;
+DROP TABLE IF EXISTS LASKUT;
+DROP TABLE IF EXISTS VARAUKSET;
+DROP TABLE IF EXISTS ASIAKASPALVELIJAT;
+DROP TABLE IF EXISTS ASIAKKAAT;
+DROP TABLE IF EXISTS MOKIT;
 
 CREATE TABLE IF NOT EXISTS MOKIT(
     mokki_id int PRIMARY KEY,
@@ -40,10 +41,21 @@ CREATE TABLE IF NOT EXISTS VARAUKSET(
     henkilomaara int,
     toiveet varchar(255) not null,
     asiakaspalvelija_id int,
-    FOREIGN KEY (asiakaspalvelija_id) REFERENCES ASIAKASPALVELIJAT(asiakaspalvelija_id),
+    FOREIGN KEY (asiakaspalvelija_id) REFERENCES ASIAKASPALVELIJAT(asiakaspalvelija_id) ON DELETE SET NULL,
     aloitus_pvm Date,
     lopetus_pvm Date,
     varauksen_tila varchar(255) not null
+);
+
+CREATE TABLE IF NOT EXISTS LASKUT(
+    lasku_id int PRIMARY KEY,
+    asiakas_id int,
+    FOREIGN KEY (asiakas_id) REFERENCES ASIAKKAAT(asiakas_id) ON DELETE CASCADE,
+    mokki_id int,
+    FOREIGN KEY (mokki_id) REFERENCES MOKIT(mokki_id),
+    kokonaishinta int,
+    varaus_id int,
+    FOREIGN KEY (varaus_id) REFERENCES VARAUKSET(varaus_id) ON DELETE CASCADE
 );
 
 INSERT INTO MOKIT (mokki_id, nimi, hinta_vrk, sijainti, henkilomaara, mukavuudet, koko_m2, kuvaus)
@@ -80,4 +92,4 @@ kahvinkeitin, kuivauskaappi, sisä- ja ulkoporeallas, palju, älykäs viihdejär
         'Luksusta pursuava ja katseita keräävä mökki kaikilla mausteilla ja aivan upealla järvimaisemalla.');
 
 INSERT INTO ASIAKASPALVELIJAT (asiakaspalvelija_id, nimi, sahkoposti, puhelinnumero)
-VALUES (1, 'Tomppa', 'tomppa@mokkikodit.fi', '0440339999');
+VALUES (1, 'Tomppa', 'tomppa@mokkikodit.fi', '0100100100');
