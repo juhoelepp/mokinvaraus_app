@@ -44,4 +44,6 @@ tai sopimus hinnasta (esimerkiksi pidempiaikainen vuokraus voisi olla huokeampaa
 ### Majoittumisen raportointi -välilehti:
 Välilehdellä näkyy tilastotietoja tehdyistä tilauksista, niiden määristä
 ja tilausten tuottamista tuloista. Tilastoja on merkitty niin kokonaisvaltaisesti kuin mökkikohtaisestikin.
+
 ![{C418BA78-137E-4817-8545-DBC76D7268F3}](https://github.com/user-attachments/assets/8de84c90-25aa-49ee-8f7f-62ca6866352c)
+
