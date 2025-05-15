@@ -15,6 +15,7 @@ public class Mokinvaraus extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("Mökkien varausohjelma");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
